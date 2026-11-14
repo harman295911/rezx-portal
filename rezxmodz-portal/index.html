@@ -1,0 +1,3041 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#04050a">
+    <meta name="referrer" content="no-referrer">
+    <title>RezX Modz — Next-Gen Gaming Portal</title>
+    
+    <!-- High-Performance Non-Blocking Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700;800&family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Tektur:wght@700;800;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700;800&family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Tektur:wght@700;800;900&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700;800&family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Tektur:wght@700;800;900&display=swap">
+    </noscript>
+    
+
+
+    <style>
+        :root {
+            --bg-void: #070708;
+            --bg-surface: #0a0a0c;
+            --card-glass: rgba(13, 13, 16, 0.9);
+            --card-border: rgba(31, 31, 36, 0.95);
+            --card-border-glow: rgba(0, 245, 212, 0.45);
+
+            /* Tab Pane Display Control */
+        .tab-pane {
+            display: none !important;
+        }
+        .tab-pane.active {
+            display: block !important;
+        }
+
+        /* Hyper Neon Cyber Palette */
+            --neon-pink: #ff135b;
+            --neon-pink-glow: rgba(255, 19, 91, 0.45);
+            --neon-violet: #8b5cf6;
+            --neon-violet-glow: rgba(139, 92, 246, 0.4);
+            --neon-cyan: #00f5d4;
+            --neon-cyan-glow: rgba(0, 245, 212, 0.45);
+            --neon-amber: #fbbf24;
+            --neon-emerald: #10b981;
+            --whatsapp-green: #25D366;
+            --whatsapp-glow: rgba(37, 211, 102, 0.4);
+
+            --text-main: #f2f2f3;
+            --text-sub: #a9a9b0;
+            --text-faint: #6a6a72;
+
+            --font-display: 'Tektur', 'Chakra Petch', sans-serif;
+            --font-head: 'Tektur', 'Outfit', sans-serif;
+            --font-cyber: 'Chakra Petch', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            background-color: var(--bg-void);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-size: 15px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Ambient Dynamic Aurora Background */
+        .ambient-aurora {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .aurora-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(110px);
+            opacity: 0.35;
+            animation: orbFloat 14s ease-in-out infinite alternate;
+        }
+
+        .orb-1 {
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, #ff135b 0%, transparent 70%);
+            top: -60px;
+            left: -80px;
+            animation-duration: 16s;
+        }
+
+        .orb-2 {
+            width: 440px;
+            height: 440px;
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            top: 25%;
+            right: -120px;
+            animation-duration: 18s;
+            animation-delay: -4s;
+        }
+
+        .orb-3 {
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, #00f5d4 0%, transparent 70%);
+            bottom: 50px;
+            left: -50px;
+            animation-duration: 20s;
+            animation-delay: -8s;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 40px) scale(1.08); }
+            100% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Cyber Geometric Grid */
+        .ambient-grid {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 19, 91, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 212, 0.035) 1px, transparent 1px);
+            background-size: 38px 38px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Main Mobile App Frame */
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+            padding: 16px 16px 95px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Header Bar */
+        .top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 4px 18px;
+        }
+
+        .brand-title-badge {
+            font-family: var(--font-cyber);
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .brand-title-badge span.brand-glow {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 12px var(--neon-pink-glow));
+        }
+
+        .top-ctrls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ctrl-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .ctrl-btn:hover {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            background: rgba(0, 245, 212, 0.12);
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.3);
+        }
+
+        .lang-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--neon-cyan);
+            font-family: var(--font-head);
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-chip:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 12px var(--neon-cyan-glow);
+        }
+
+        /* Status Strip */
+        .status-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px 14px;
+        }
+
+        .status-pill-online {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 10px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .pulse-beacon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--neon-emerald);
+            box-shadow: 0 0 12px var(--neon-emerald);
+            animation: pulse-beacon 1.8s infinite;
+        }
+
+        @keyframes pulse-beacon {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.35; transform: scale(0.85); }
+        }
+
+        .servers-counter-pill {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--neon-cyan);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(0, 245, 212, 0.08);
+            padding: 6px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 245, 212, 0.25);
+        }
+
+        /* ========================================================
+           DOUBLE-RING FUTURISTIC CYBER TACHOMETER
+           ======================================================== */
+        .tachometer-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 26px 0 34px;
+            position: relative;
+        }
+
+        .tachometer-wrap {
+            position: relative;
+            width: 245px;
+            height: 245px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Rotating Background Energy Ring */
+        .tachometer-wrap::before {
+            content: "";
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 19, 91, 0.2);
+            animation: rotateEnergyRing 24s linear infinite;
+        }
+
+        @keyframes rotateEnergyRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .tachometer-svg {
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
+
+        .track-circ {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.05);
+            stroke-width: 6;
+            stroke-dasharray: 4 6;
+        }
+
+        .progress-circ {
+            fill: none;
+            stroke: url(#cyberPrismGradient);
+            stroke-width: 7;
+            stroke-linecap: round;
+            filter: drop-shadow(0 0 10px var(--neon-pink));
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        .tachometer-core {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            text-align: center;
+        }
+
+        .core-emblem-wrap {
+            position: relative;
+            width: 76px;
+            height: 76px;
+            margin-bottom: 8px;
+        }
+
+        .core-emblem-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1.5px solid var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 245, 212, 0.45), 0 0 45px rgba(139, 92, 246, 0.35);
+            animation: coreBreath 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes coreBreath {
+            0% { transform: scale(1); filter: brightness(1); }
+            100% { transform: scale(1.06); filter: brightness(1.25); }
+        }
+
+        .hud-countdown {
+            font-family: var(--font-cyber);
+            font-size: 29px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0, 245, 212, 0.45);
+        }
+
+        .hud-countdown-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+        }
+
+        /* Glassmorphic Cyber Cards */
+        .cyber-glass-card {
+            background: #0d0d10;
+            border: 1px solid #1f1f24;
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            padding: 18px;
+            margin-bottom: 14px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            transition: all 0.25s ease;
+        }
+
+        .cyber-glass-card:hover {
+            border-color: rgba(0, 245, 212, 0.35);
+        }
+
+        /* Key Info Row */
+        .key-spec-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 4px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 14px;
+        }
+
+        .key-badge-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .key-tag-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+        }
+
+        .key-code-text {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .btn-copy-chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #1c1c20;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+            color: var(--neon-cyan);
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-copy-chip:hover {
+            background: var(--neon-cyan);
+            color: #070708;
+            box-shadow: 0 0 12px var(--neon-cyan);
+            transform: scale(1.03);
+        }
+
+        /* 3-Column Metadata Grid */
+        .meta-spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr 1fr;
+            gap: 10px;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .spec-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--text-faint);
+            text-transform: uppercase;
+        }
+
+        .spec-val {
+            font-family: var(--font-head);
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ========================================================
+           HIGH-VOLTAGE ANIMATED CTA: ADD SUBSCRIPTION
+           ======================================================== */
+        .cta-master-launch {
+            background: linear-gradient(135deg, #ff135b 0%, #8b5cf6 50%, #00f5d4 100%);
+            background-size: 250% 250%;
+            animation: gradientWave 5s ease infinite;
+            border-radius: 18px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            color: #ffffff;
+            box-shadow: 0 10px 35px rgba(255, 19, 91, 0.35), 0 0 45px rgba(0, 245, 212, 0.25);
+            transition: all 0.25s ease;
+            border: none;
+            width: 100%;
+            margin-bottom: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientWave {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cta-master-launch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 45px rgba(255, 19, 91, 0.5), 0 0 60px rgba(0, 245, 212, 0.4);
+        }
+
+        .cta-master-launch:active {
+            transform: scale(0.98);
+        }
+
+        .cta-headings {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            text-align: left;
+        }
+
+        .cta-title {
+            font-family: var(--font-cyber);
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-caption {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0.95;
+            letter-spacing: 0.3px;
+        }
+
+        .cta-action-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+
+
+        /* ========================================================
+           TAB 2: FEATURES SCREEN
+           ======================================================== */
+        .features-subbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px 14px;
+        }
+
+        .notice-txt {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-faint);
+        }
+
+        .mods-counter-badge {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--neon-pink);
+            background: rgba(255, 19, 91, 0.12);
+            padding: 4px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 19, 91, 0.3);
+        }
+
+        .mod-card {
+            background: #0d0d10;
+            border: 1px solid #1f1f24;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .mod-card:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+
+        .mod-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .mod-title-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-cyber);
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .mod-num {
+            color: var(--neon-pink);
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+
+        .tag-pill-glow {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 7px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .tag-new {
+            background: rgba(0, 245, 212, 0.15);
+            color: var(--neon-cyan);
+            border: 1px solid rgba(0, 245, 212, 0.35);
+        }
+
+        .tag-inverted {
+            background: rgba(139, 92, 246, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(139, 92, 246, 0.35);
+        }
+
+        .mod-desc {
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.45;
+        }
+
+        /* Cyberpunk Neon Toggle Switches */
+        .cyber-switch {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 25px;
+        }
+
+        .cyber-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .cyber-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: .3s;
+            border-radius: 25px;
+        }
+
+        .cyber-slider:before {
+            position: absolute;
+            content: "";
+            height: 17px;
+            width: 17px;
+            left: 3px;
+            bottom: 3px;
+            background-color: #94a3b8;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .cyber-slider {
+            background: linear-gradient(135deg, rgba(255, 19, 91, 0.3), rgba(0, 245, 212, 0.3));
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+        }
+
+        input:checked + .cyber-slider:before {
+            transform: translateX(21px);
+            background-color: var(--neon-cyan);
+            box-shadow: 0 0 12px var(--neon-cyan);
+        }
+
+        /* Mark Style Pills */
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .hud-pill {
+            padding: 10px 4px;
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+            background: #16161a;
+            border: none;
+            font-family: var(--font-cyber);
+            font-size: 11px;
+            font-weight: 700;
+            color: #8b8b92;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .hud-pill.active {
+            background: #ededed;
+            color: #070708;
+            font-weight: 800;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.45);
+        }
+
+        /* ========================================================
+           TAB 3: MANAGE ACTION CARDS & DOCUMENTATION
+           ======================================================== */
+
+        .action-link-card {
+            background: #0d0d10;
+            border: 1px solid #1f1f24;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .action-link-card:hover {
+            border-color: var(--neon-cyan);
+            background: #111114;
+        }
+
+        .action-link-card:hover {
+            border-color: rgba(0, 245, 212, 0.35);
+            transform: translateX(4px);
+        }
+
+        .card-text-block {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: left;
+        }
+
+        .card-header-line {
+            font-family: var(--font-cyber);
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-sub-url {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-faint);
+        }
+
+        .arrow-glyph {
+            color: var(--text-faint);
+            font-size: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .action-link-card:hover .arrow-glyph {
+            color: var(--neon-cyan);
+            transform: translateX(4px);
+        }
+
+        .danger-card {
+            border-color: rgba(244, 63, 94, 0.35);
+            background: rgba(244, 63, 94, 0.06);
+        }
+
+        .danger-card:hover {
+            border-color: var(--neon-pink);
+            background: rgba(244, 63, 94, 0.15);
+        }
+
+        .danger-card .card-header-line {
+            color: #fda4af;
+        }
+
+        /* ========================================================
+           SCREEN 0: CYBER GATEWAY UNLOCK
+           ======================================================== */
+        .gateway-unlock-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 10px;
+            text-align: center;
+            min-height: 85vh;
+        }
+
+        .gateway-logo-wrap {
+            position: relative;
+            width: 164px;
+            height: 164px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gateway-logo-wrap::before {
+            content: "";
+            position: absolute;
+            inset: -6px;
+            border-radius: 18px;
+            border: 1.5px solid rgba(139, 92, 246, 0.45);
+            box-shadow: 0 0 35px rgba(139, 92, 246, 0.3), inset 0 0 15px rgba(0, 245, 212, 0.15);
+            pointer-events: none;
+        }
+
+        .gateway-logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 45px rgba(139, 92, 246, 0.4);
+            filter: drop-shadow(0 0 32px rgba(0, 245, 212, 0.25));
+            animation: coreBreath 3s ease-in-out infinite alternate;
+        }
+
+        .gateway-title {
+            font-family: var(--font-display);
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            color: #ededed;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+        }
+
+        .gateway-title span {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 16px rgba(0, 245, 212, 0.6));
+        }
+
+        .gateway-subtitle {
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: #6a6a72;
+            margin-bottom: 32px;
+            text-transform: lowercase;
+        }
+
+        .gateway-form-card {
+            width: 100%;
+            background: #0d0d10;
+            border: 1px solid #1f1f24;
+            clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+            padding: 24px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            text-align: left;
+        }
+
+        .gateway-input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            color: #8b8b92;
+            letter-spacing: 0.12em;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .gateway-input-label .ph-accent-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 8px var(--neon-cyan);
+            display: inline-block;
+        }
+
+        .gateway-input-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #1f1f24;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            padding: 1.5px;
+            transition: all 0.2s ease;
+        }
+
+        .gateway-input-box:focus-within {
+            background: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 245, 212, 0.35);
+        }
+
+        .gateway-key-field {
+            width: 100%;
+            height: 56px;
+            background: #0e0e11;
+            clip-path: polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px);
+            border: none;
+            padding: 0 85px 0 16px;
+            color: #f2f2f3;
+            font-family: var(--font-mono);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            outline: none;
+        }
+
+        .gateway-key-field::placeholder {
+            color: #3d3d44;
+            font-weight: 500;
+        }
+
+        .gateway-paste-btn {
+            position: absolute;
+            right: 8px;
+            height: 40px;
+            padding: 0 16px;
+            background: #1c1c20;
+            border: none;
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+            color: #c9c9cf;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .gateway-paste-btn:hover {
+            background: var(--neon-cyan);
+            color: #070708;
+            box-shadow: 0 0 12px var(--neon-cyan);
+        }
+
+        .gateway-master-submit {
+            width: 100%;
+            min-height: 60px;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            background: #ededed;
+            color: #070708;
+            border: none;
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+            margin-top: 18px;
+            box-shadow: 0 0 25px rgba(237, 237, 237, 0.35);
+        }
+
+        .gateway-master-submit:hover {
+            background: #ffffff;
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
+            transform: scale(1.015);
+        }
+
+        .gateway-master-submit:active {
+            transform: scale(0.985);
+        }
+
+        .ph-footnotes {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        .ph-footnotes .fn-seller {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: #a9a9b0;
+        }
+
+        .ph-footnotes .fn-timer {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: #5d5d64;
+        }
+
+        .ph-scanlines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 999;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%);
+            background-size: 100% 4px;
+            opacity: 0.45;
+        }
+
+        .ph-watermark-wrap {
+            position: fixed;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 580px;
+            height: 580px;
+            opacity: 0.038;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ph-watermark-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* ========================================================
+           FIXED FLOATING DOCK BOTTOM NAVIGATION
+           ======================================================== */
+        .dock-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 440px;
+            height: 64px;
+            background: #070708;
+            border-top: 1px solid #16161a;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 10px;
+            z-index: 99;
+        }
+
+        .dock-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            flex: 1;
+            height: 100%;
+            background: none;
+            border: none;
+            color: #66666d;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .dock-item svg {
+            width: 20px;
+            height: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .dock-item.active {
+            color: #ededed;
+        }
+
+        .dock-item.active svg {
+            color: var(--neon-cyan);
+            filter: drop-shadow(0 0 10px var(--neon-cyan));
+            transform: translateY(-1px);
+        }
+
+        .dock-active-glow {
+            position: absolute;
+            top: 0;
+            width: 36px;
+            height: 2px;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 12px var(--neon-cyan);
+            display: none;
+        }
+
+        .dock-item.active .dock-active-glow {
+            display: block;
+        }
+
+        /* Toast Alert */
+        .cyber-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: rgba(11, 16, 32, 0.95);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--neon-cyan-glow);
+            backdrop-filter: blur(14px);
+            border-radius: 14px;
+            padding: 12px 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-family: var(--font-head);
+            font-size: 13px;
+            font-weight: 800;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .cyber-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Modal Overlay */
+        .modal-shade {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-shade.active {
+            display: flex;
+        }
+
+        .modal-window {
+            background: var(--bg-surface);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            padding: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px var(--neon-cyan-glow);
+        }
+
+        .modal-step-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.45;
+            margin-bottom: 12px;
+        }
+
+        .modal-num-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(0, 245, 212, 0.15);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* === RezX Modz ADVANCED FEATURES & DEVICE MANAGEMENT CSS === */
+        .bell-btn-wrap {
+            position: relative;
+        }
+        .bell-badge-dot {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--neon-pink);
+            box-shadow: 0 0 8px var(--neon-pink);
+            animation: pulseDot 2s infinite;
+        }
+        @keyframes pulseDot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.7; }
+        }
+
+        /* Device Box */
+        .device-box {
+            background: #0d0d10;
+            border: 1px solid #1f1f24;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            padding: 16px 18px;
+            margin-bottom: 14px;
+            transition: all 0.2s ease;
+        }
+        .device-box:hover {
+            border-color: rgba(0, 245, 212, 0.35);
+        }
+        .device-box-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .device-status-badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .badge-locked {
+            background: rgba(0, 245, 212, 0.12);
+            color: var(--neon-cyan);
+            border: 1px solid rgba(0, 245, 212, 0.35);
+        }
+        .device-info-name {
+            font-family: var(--font-cyber);
+            font-size: 15px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .device-info-hwid {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-faint);
+            word-break: break-all;
+        }
+        .btn-reset-device {
+            margin-top: 14px;
+            width: 100%;
+            padding: 11px 14px;
+            background: rgba(255, 19, 91, 0.12);
+            border: 1px solid rgba(255, 19, 91, 0.4);
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+            color: var(--neon-pink);
+            font-family: var(--font-cyber);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-reset-device:hover:not(:disabled) {
+            background: var(--neon-pink);
+            color: #ffffff;
+            box-shadow: 0 0 18px var(--neon-pink-glow);
+        }
+        .btn-reset-device:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-faint);
+        }
+
+        /* Gloo Wall Angle Slider */
+        .angle-slider-wrap {
+            margin: 12px 0 6px;
+        }
+        .angle-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-faint);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .angle-val-badge {
+            color: var(--neon-cyan);
+            font-weight: 800;
+            background: rgba(0, 245, 212, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 245, 212, 0.25);
+        }
+        .angle-range-slider {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #1f1f24;
+            border-radius: 3px;
+            outline: none;
+        }
+        .angle-range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--neon-cyan);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--neon-cyan);
+            border: none;
+        }
+        .angle-preset-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .angle-pill {
+            padding: 7px 2px;
+            background: #16161a;
+            border: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-sub);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .angle-pill.active {
+            background: var(--neon-cyan);
+            color: #070708;
+            font-weight: 800;
+            box-shadow: 0 0 12px rgba(0, 245, 212, 0.4);
+        }
+
+        /* Waypoint Drop Spot Grid */
+        .drop-spot-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        /* Update Notes Modal */
+        .update-list-container {
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin: 14px 0 20px;
+        }
+        .update-list-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .update-list-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 245, 212, 0.4);
+            border-radius: 2px;
+        }
+        .update-item-card {
+            background: rgba(22, 22, 26, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+        }
+        .update-ver-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .update-ver-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--neon-pink);
+            background: rgba(255, 19, 91, 0.15);
+            padding: 2px 7px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 19, 91, 0.3);
+        }
+        .update-ver-title {
+            font-family: var(--font-cyber);
+            font-size: 13px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .update-ver-body {
+            font-size: 12px;
+            color: var(--text-sub);
+            line-height: 1.45;
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- SVG Gradients Definition -->
+<svg width="0" height="0" style="position:absolute;">
+    <defs>
+        <linearGradient id="cyberPrismGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff135b" />
+            <stop offset="50%" stop-color="#8b5cf6" />
+            <stop offset="100%" stop-color="#00f5d4" />
+        </linearGradient>
+    </defs>
+</svg>
+
+<!-- Ambient Aurora & Grid -->
+<div class="ambient-aurora">
+    <div class="aurora-orb orb-1"></div>
+    <div class="aurora-orb orb-2"></div>
+    <div class="aurora-orb orb-3"></div>
+</div>
+<div class="ambient-grid"></div>
+<div class="ph-scanlines"></div>
+<div class="ph-watermark-wrap">
+    <img src="assets/rezx-logo.webp" alt="watermark">
+</div>
+<canvas id="ambient-cyber-canvas" style="position:fixed; inset:0; pointer-events:none; z-index:0; width:100%; height:100%;"></canvas>
+
+<!-- Toast Notification -->
+<div id="toast" class="cyber-toast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00f5d4" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toast-text">RezX Modz Notification</span>
+</div>
+
+<!-- Getting Started Modal -->
+<div id="modal-guide" class="modal-shade">
+    <div class="modal-window">
+        <div style="font-family:var(--font-cyber); font-size:20px; font-weight:800; color:#fff; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00f5d4" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span>REZX ACTIVATION GUIDE</span>
+        </div>
+        <div style="margin: 16px 0 20px;">
+            <div class="modal-step-row">
+                <span class="modal-num-badge">1</span>
+                <span>Tap <strong>ADD TO HIDDIFY</strong> or download <strong>RezX Modz APK</strong> to auto-import VIP servers into Hiddify.</span>
+            </div>
+            <div class="modal-step-row">
+                <span class="modal-num-badge">2</span>
+                <span>Select <strong>01. INDIA RezX 01</strong> for the lowest ping.</span>
+            </div>
+            <div class="modal-step-row">
+                <span class="modal-num-badge">3</span>
+                <span>Tap the center power button to turn ON.</span>
+            </div>
+            <div class="modal-step-row">
+                <span class="modal-num-badge">4</span>
+                <span>Launch Free Fire or FF MAX & enjoy full Aimbot + Moco ESP!</span>
+            </div>
+        </div>
+        <button type="button" class="gateway-master-submit" style="height:48px; font-size:15px;" onclick="closeModalGuide()">CONFIRM &amp; CLOSE</button>
+    </div>
+</div>
+
+
+<!-- Update Notes Modal (Inspired by RezX Modz v1.7) -->
+<div id="modal-updates" class="modal-shade">
+    <div class="modal-window" style="max-width: 440px;">
+        <div style="font-family:var(--font-cyber); font-size:18px; font-weight:800; color:#fff; display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                <span>REZX PATCH NOTES</span>
+            </div>
+            <span class="tag-pill-glow tag-new" style="margin:0;">v1.7</span>
+        </div>
+        <p style="font-family:var(--font-mono); font-size:11px; color:var(--text-faint); margin-bottom:12px;">system changelog &amp; combat engine upgrades</p>
+
+        <div class="update-list-container">
+            <!-- v1.7 -->
+            <div class="update-item-card" style="border-color: rgba(255, 19, 91, 0.3);">
+                <div class="update-ver-header">
+                    <span class="update-ver-tag">v1.7 LATEST</span>
+                    <span style="font-family:var(--font-mono); font-size:10px; color:var(--text-faint);">OCT 2026</span>
+                </div>
+                <div class="update-ver-title">aim lag is back, next to aimpoint</div>
+                <div class="update-ver-body">aim lag is back, sitting under aimpoint. run it with aimpoint or on its own. every feature now carries multi-language support (EN / TH / AR).</div>
+            </div>
+
+            <!-- v1.6 -->
+            <div class="update-item-card">
+                <div class="update-ver-header">
+                    <span class="update-ver-tag" style="color:var(--neon-cyan); background:rgba(0,245,212,0.12); border-color:rgba(0,245,212,0.3);">v1.6</span>
+                    <span style="font-family:var(--font-mono); font-size:10px; color:var(--text-faint);">OCT 2026</span>
+                </div>
+                <div class="update-ver-title">aimpoint replaces aim lag</div>
+                <div class="update-ver-body">new aimpoint: your aim assist locks onto the neck instead of the chest, so shots that used to hit the body land as headshots. one switch, works on every gun, applies from next match.</div>
+            </div>
+
+            <!-- v1.5 -->
+            <div class="update-item-card">
+                <div class="update-ver-header">
+                    <span class="update-ver-tag" style="color:#fbbf24; background:rgba(251,191,36,0.12); border-color:rgba(251,191,36,0.3);">v1.5</span>
+                    <span style="font-family:var(--font-mono); font-size:10px; color:var(--text-faint);">OCT 2026</span>
+                </div>
+                <div class="update-ver-title">udp combat routing &amp; esp stability</div>
+                <div class="update-ver-body">udp 1000-65535 proxy routing upgraded. direct quic &amp; dns resolution ensures zero network disconnects across all operators.</div>
+            </div>
+
+            <!-- v1.4 -->
+            <div class="update-item-card">
+                <div class="update-ver-header">
+                    <span class="update-ver-tag">v1.4</span>
+                    <span style="font-family:var(--font-mono); font-size:10px; color:var(--text-faint);">SEP 2026</span>
+                </div>
+                <div class="update-ver-title">fast revive + rebuilt aim lag</div>
+                <div class="update-ver-body">new fast revive: pick a knocked teammate up in about 100 ms instead of ~3 seconds. aim lag rebuilt to freeze target packets without dropping client packets.</div>
+            </div>
+
+            <!-- v1.3 -->
+            <div class="update-item-card">
+                <div class="update-ver-header">
+                    <span class="update-ver-tag">v1.3</span>
+                    <span style="font-family:var(--font-mono); font-size:10px; color:var(--text-faint);">SEP 2026</span>
+                </div>
+                <div class="update-ver-title">smarter server picking &amp; delhi vip</div>
+                <div class="update-ver-body">config dynamically selects the node with lowest live ping to your game server. delhi vip 20-30ms pure ipv4 added.</div>
+            </div>
+
+            <!-- v1.2 -->
+            <div class="update-item-card">
+                <div class="update-ver-header">
+                    <span class="update-ver-tag">v1.2</span>
+                    <span style="font-family:var(--font-mono); font-size:10px; color:var(--text-faint);">AUG 2026</span>
+                </div>
+                <div class="update-ver-title">fast landing waypoint mode</div>
+                <div class="update-ver-body">added fast landing: drop straight onto saved hot-drop waypoint like Peak instead of following the flight path.</div>
+            </div>
+
+            <!-- v1.1 -->
+            <div class="update-item-card">
+                <div class="update-ver-header">
+                    <span class="update-ver-tag">v1.1</span>
+                    <span style="font-family:var(--font-mono); font-size:10px; color:var(--text-faint);">AUG 2026</span>
+                </div>
+                <div class="update-ver-title">device lock &amp; 7-day reset cooldown</div>
+                <div class="update-ver-body">keys are locked to one device to prevent abuse. users can self-service unbind their phone once every 7 days.</div>
+            </div>
+
+            <!-- v1.0 -->
+            <div class="update-item-card">
+                <div class="update-ver-header">
+                    <span class="update-ver-tag">v1.0</span>
+                    <span style="font-family:var(--font-mono); font-size:10px; color:var(--text-faint);">JUL 2026</span>
+                </div>
+                <div class="update-ver-title">initial rezx suite release</div>
+                <div class="update-ver-body">key-based authorization, live marker esp, aim assist, and 1-tap Hiddify import.</div>
+            </div>
+        </div>
+
+        <button type="button" class="gateway-master-submit" style="height:44px; font-size:14px;" onclick="closeModalUpdates()">CLOSE UPDATES</button>
+    </div>
+</div>
+
+<!-- Reset Device Confirmation Modal (Inspired by RezX Modz) -->
+<div id="modal-reset-device" class="modal-shade">
+    <div class="modal-window">
+        <div style="font-family:var(--font-cyber); font-size:19px; font-weight:800; color:#fff; display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            <span id="reset-modal-title">RESET DEVICE BINDING?</span>
+        </div>
+        <p id="reset-modal-body" style="font-size:13px; color:var(--text-sub); line-height:1.5; margin-bottom:16px;">
+            This will unlock your access key from this phone. The next phone that connects with this key will be locked to it.
+            <br><br>
+            <strong style="color:var(--neon-cyan);">Note:</strong> You can only reset your device once every 7 days.
+        </p>
+        <div style="display:flex; gap:10px;">
+            <button type="button" class="gateway-master-submit" style="height:44px; font-size:13px; background:#1c1c22; color:var(--text-sub); border-color:#2a2a34; flex:1;" onclick="closeResetModal()">CANCEL</button>
+            <button type="button" id="confirm-reset-btn" class="gateway-master-submit" style="height:44px; font-size:13px; background:var(--neon-pink); color:#fff; flex:1.3;" onclick="confirmDeviceReset()">CONFIRM RESET</button>
+        </div>
+    </div>
+</div>
+
+<div class="app-container">
+
+    <!-- ========================================================
+         SCREEN 0: KEY UNLOCK / AUTH GATEWAY (When Not Logged In)
+         ======================================================== -->
+    <div id="screen-unlock" class="gateway-unlock-screen" style="display:none;">
+        <div class="top-header" style="width:100%; justify-content:flex-end;">
+            <div class="lang-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                <span>EN</span>
+            </div>
+        </div>
+
+        <div class="gateway-logo-wrap">
+            <img src="assets/rezx-logo.webp" alt="RezX Modz" class="gateway-logo-img" onerror="this.src='assets/rezx-logo.png'">
+        </div>
+
+        <h1 class="gateway-title">REZ<span class="brand-glow">X</span></h1>
+        <p class="gateway-subtitle">no account. no password. just your key.</p>
+
+        <form id="unlock-form" class="gateway-form-card" onsubmit="handleUnlock(event)">
+            <div class="gateway-input-label">
+                <span class="ph-accent-dot"></span>
+                <span>access key</span>
+            </div>
+            <div class="gateway-input-box">
+                <input type="text" id="unlock-key-input" class="gateway-key-field" placeholder="REZX-XXXX-XXXX-XXXX" required spellcheck="false" autocomplete="off" autocapitalize="characters">
+                <button type="button" class="gateway-paste-btn" onclick="pasteKeyToInput()">paste</button>
+            </div>
+
+            <button type="submit" id="unlock-btn" class="gateway-master-submit"><span>unlock rezx access</span></button>
+            <div class="ph-footnotes">
+                <span class="fn-seller">no key? contact your seller.</span>
+                <span class="fn-timer">your time starts when you connect.</span>
+            </div>
+
+            <div style="margin-top: 14px; text-align: center;">
+                <a href="https://whatsapp.com/channel/0029VbDu0Td96H4VbSt1Ss3f" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 10px 14px; background: rgba(37, 211, 102, 0.12); border: 1px solid rgba(37, 211, 102, 0.35); border-radius: 9px; color: #25D366; font-size: 12px; font-weight: 700; text-decoration: none; transition: all 0.2s ease; letter-spacing: 0.05em; text-transform: uppercase;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    <span>Official WhatsApp Channel</span>
+                </a>
+            </div>
+        </form>
+
+    </div>
+
+    <!-- ========================================================
+         SCREEN 1: AUTHENTICATED RezX Modz SUITE (Home, Features, Manage)
+         ======================================================== -->
+    <div id="screen-dashboard" style="display:none; width:100%;">
+
+        <!-- ==================== TAB 1: HOME ==================== -->
+        <div id="tab-home" class="tab-pane">
+            <!-- Header Bar -->
+            <div class="top-header">
+                <div class="brand-title-badge">HOM<span class="brand-glow">E</span></div>
+                <div class="top-ctrls">
+                    <button type="button" class="ctrl-btn bell-btn-wrap" onclick="openModalUpdates()" title="Update Notes (v1.7)">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        <span class="bell-badge-dot"></span>
+                    </button>
+                    <div class="lang-chip" onclick="cycleLanguage()" title="Switch Language (EN / TH / AR)" style="cursor:pointer;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="current-lang-label">EN</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Strip -->
+            <div class="status-strip">
+                <div class="status-pill-online">
+                    <span class="pulse-beacon"></span>
+                    <span>ACTIVE REZX</span>
+                </div>
+                <div class="servers-counter-pill" id="servers-count-tag">REZX VIP CONNECTED (⚡ BEST LOWEST PING)</div>
+            </div>
+
+            <!-- Double-Ring Cyber Tachometer Countdown Gauge -->
+            <div class="tachometer-card">
+                <div class="tachometer-wrap">
+                    <svg class="tachometer-svg" viewBox="0 0 100 100">
+                        <defs>
+                            <linearGradient id="cyberPrismGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff135b" />
+                                <stop offset="50%" stop-color="#8b5cf6" />
+                                <stop offset="100%" stop-color="#00f5d4" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="track-circ" cx="50" cy="50" r="42"></circle>
+                        <circle id="gauge-progress" class="progress-circ" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="60"></circle>
+                    </svg>
+                    <div class="tachometer-core">
+                        <div class="core-emblem-wrap">
+                            <img src="assets/rezx-logo.webp" alt="RezX Modz" class="core-emblem-img" onerror="this.src='assets/rezx-logo.png'">
+                        </div>
+                        <div class="hud-countdown" id="countdown-val">--H --M</div>
+                        <div class="hud-countdown-label">TIME REMAINING</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Info Card -->
+            <div class="cyber-glass-card">
+                <div class="key-spec-row">
+                    <div class="key-badge-box">
+                        <span class="key-tag-label">KEY</span>
+                        <span class="key-code-text" id="display-key">REZX-****</span>
+                    </div>
+                    <button type="button" class="btn-copy-chip" onclick="copyCurrentKey()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span>COPY</span>
+                    </button>
+                </div>
+
+                <!-- 3-Column Metadata -->
+                <div class="meta-spec-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">ACTIVATED</span>
+                        <span class="spec-val" id="meta-activated">-- --- ----</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">EXPIRES</span>
+                        <span class="spec-val" id="meta-expires">-- --- ----</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">DEVICE</span>
+                        <span class="spec-val" id="meta-device">RezX · Android</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SECTION 1: HAPPY PROXY (ANDROID & iOS) ================= -->
+                        <!-- ================= ONLY TWO BUTTONS AFTER LOGIN ================= -->
+            <div class="hub-import-section" style="margin-top:20px; margin-bottom:24px; display:flex; flex-direction:column; gap:14px;">
+                <!-- Button 1: Add To Happy -->
+                <button type="button" id="btn-happy" class="cta-master-launch cta-happy-rage" onclick="launchHappy()" style="background:linear-gradient(135deg, rgba(236,72,153,0.22) 0%, rgba(168,85,247,0.3) 100%); border:1px solid rgba(236,72,153,0.6); box-shadow:0 0 20px rgba(236,72,153,0.25); width:100%; min-height:58px; border-radius:12px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:0 20px;">
+                    <div class="cta-headings" style="text-align:left;">
+                        <span class="cta-title" style="color:#fce7f3; text-shadow:0 0 10px rgba(236,72,153,0.7); display:flex; align-items:center; gap:8px; font-family:var(--font-cyber); font-weight:800; font-size:15px; letter-spacing:0.5px;">
+                            <span>Add To Happy</span>
+                        </span>
+                        <span class="cta-caption" style="color:#fbcfe8; font-size:11px; display:block; margin-top:2px;">Fast Direct Import • iOS & Android</span>
+                    </div>
+                    <div class="cta-action-icon" style="color:#f472b6;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    </div>
+                </button>
+
+                <!-- Button 2: Add To ZeroX Apk / Add To RezX Apk -->
+                <button type="button" id="btn-apk" class="cta-master-launch cta-apk-rage" onclick="launchApk()" style="background:linear-gradient(135deg, rgba(234,179,8,0.22) 0%, rgba(249,115,22,0.3) 100%); border:1px solid rgba(234,179,8,0.6); box-shadow:0 0 20px rgba(234,179,8,0.25); width:100%; min-height:58px; border-radius:12px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:0 20px;">
+                    <div class="cta-headings" style="text-align:left;">
+                        <span class="cta-title" style="color:#fef9c3; text-shadow:0 0 10px rgba(234,179,8,0.7); display:flex; align-items:center; gap:8px; font-family:var(--font-cyber); font-weight:800; font-size:15px; letter-spacing:0.5px;">
+                            <span>Add To RezX Apk</span>
+                        </span>
+                        <span class="cta-caption" style="color:#fef08a; font-size:11px; display:block; margin-top:2px;">Direct Android APK Import</span>
+                    </div>
+                    <div class="cta-action-icon" style="color:#eab308;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 2: FEATURES ==================== -->
+        <div id="tab-features" class="tab-pane" style="display:none;">
+            <!-- Header Bar -->
+            <div class="top-header">
+                <div class="brand-title-badge">FEATURE<span class="brand-glow">S</span></div>
+                <div class="top-ctrls">
+                    <button type="button" class="ctrl-btn bell-btn-wrap" onclick="openModalUpdates()" title="Update Notes (v1.7)">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        <span class="bell-badge-dot"></span>
+                    </button>
+                    <div class="lang-chip" onclick="cycleLanguage()" title="Switch Language (EN / TH / AR)" style="cursor:pointer;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="current-lang-label">EN</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Notice -->
+            <div class="features-subbar">
+                <span class="notice-txt">changes apply from your next match</span>
+                <span id="features-counter" class="mods-counter-badge">5/6 ACTIVE</span>
+            </div>
+
+            <!-- Mod 01: MARKER -->
+            <div class="mod-card">
+                <div class="mod-card-top">
+                    <div class="mod-title-group">
+                        <span class="mod-num">01</span>
+                        <span>MARKER</span>
+                    </div>
+                    <label class="cyber-switch">
+                        <input type="checkbox" id="feat-marker" checked onchange="handleFeatureToggle()">
+                        <span class="cyber-slider"></span>
+                    </label>
+                </div>
+                <p class="mod-desc">marks every enemy on your screen with real-time locator tags.</p>
+
+                <div style="font-family:var(--font-mono); font-size:10px; font-weight:800; color:var(--neon-cyan); letter-spacing:1.5px; margin:14px 0 8px; text-transform:uppercase;">
+                    MARK STYLE
+                </div>
+                <div class="style-grid">
+                    <button type="button" class="hud-pill" onclick="selectMarkStyle(this)">PHANTOM</button>
+                    <button type="button" class="hud-pill" onclick="selectMarkStyle(this)">DREAM</button>
+                    <button type="button" class="hud-pill" onclick="selectMarkStyle(this)">ICE WALL</button>
+                    <button type="button" class="hud-pill active" onclick="selectMarkStyle(this)">MOCO</button>
+                    <button type="button" class="hud-pill" onclick="selectMarkStyle(this)">CLU</button>
+                    <button type="button" class="hud-pill" onclick="selectMarkStyle(this)">SHIROU</button>
+                    <button type="button" class="hud-pill" onclick="selectMarkStyle(this)">IRIS</button>
+                    <button type="button" class="hud-pill" onclick="selectMarkStyle(this)">DREKI</button>
+                </div>
+            </div>
+
+            <!-- Mod 02: AIMPOINT -->
+            <div class="mod-card">
+                <div class="mod-card-top">
+                    <div class="mod-title-group">
+                        <span class="mod-num">02</span>
+                        <span>AIMPOINT</span>
+                        <span class="tag-pill-glow tag-new">NEW</span>
+                    </div>
+                    <label class="cyber-switch">
+                        <input type="checkbox" id="feat-aimpoint" checked onchange="handleFeatureToggle()">
+                        <span class="cyber-slider"></span>
+                    </label>
+                </div>
+                <p class="mod-desc">moves your aim from the chest to the neck, so body shots land as headshots.</p>
+            </div>
+
+            <!-- Mod 03: AIM LAG -->
+            <div class="mod-card">
+                <div class="mod-card-top">
+                    <div class="mod-title-group">
+                        <span class="mod-num">03</span>
+                        <span>AIM LAG</span>
+                    </div>
+                    <label class="cyber-switch">
+                        <input type="checkbox" id="feat-aimlag" checked onchange="handleFeatureToggle()">
+                        <span class="cyber-slider"></span>
+                    </label>
+                </div>
+                <p class="mod-desc">freezes the enemy for a moment while you fire or scope, so they're easier to hit.</p>
+
+                <div style="font-family:var(--font-mono); font-size:10px; font-weight:800; color:var(--text-faint); letter-spacing:1.5px; margin:14px 0 6px; text-transform:uppercase;">
+                    FREEZE TRIGGER MODES
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-top:1px solid rgba(255,255,255,0.04);">
+                    <span style="font-size:13px; font-weight:600; color:var(--text-sub);">when firing</span>
+                    <label class="cyber-switch">
+                        <input type="checkbox" id="sub-firing" checked onchange="handleSubFeature()">
+                        <span class="cyber-slider"></span>
+                    </label>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-top:1px solid rgba(255,255,255,0.04);">
+                    <span style="font-size:13px; font-weight:600; color:var(--text-sub);">when scoping</span>
+                    <label class="cyber-switch">
+                        <input type="checkbox" id="sub-scoping" checked onchange="handleSubFeature()">
+                        <span class="cyber-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Mod 04: GLOO WALL ROTATION (from RezX Modz) -->
+            <div class="mod-card">
+                <div class="mod-card-top">
+                    <div class="mod-title-group">
+                        <span class="mod-num">04</span>
+                        <span id="label-feat-gloo">GLOO WALL ROTATION</span>
+                        <span class="tag-pill-glow tag-inverted">180° DEFEND</span>
+                    </div>
+                    <label class="cyber-switch">
+                        <input type="checkbox" id="feat-gloo" checked onchange="handleFeatureToggle()">
+                        <span class="cyber-slider"></span>
+                    </label>
+                </div>
+                <p class="mod-desc" id="desc-feat-gloo">turns your gloo wall to the angle you set for instant rear or flank defence.</p>
+
+                <div class="angle-slider-wrap">
+                    <div class="angle-header">
+                        <span id="label-wall-angle">WALL ANGLE</span>
+                        <span id="gloo-angle-val" class="angle-val-badge">180°</span>
+                    </div>
+                    <input type="range" id="gloo-angle-slider" class="angle-range-slider" min="0" max="360" step="5" value="180" oninput="handleAngleSlider(this.value)">
+                    <div class="angle-preset-grid">
+                        <button type="button" class="angle-pill" onclick="setGlooAngle(0, this)">0° FRONT</button>
+                        <button type="button" class="angle-pill" onclick="setGlooAngle(90, this)">90° RIGHT</button>
+                        <button type="button" class="angle-pill active" onclick="setGlooAngle(180, this)">180° REAR</button>
+                        <button type="button" class="angle-pill" onclick="setGlooAngle(270, this)">270° LEFT</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mod 05: FAST REVIVE (from RezX Modz) -->
+            <div class="mod-card">
+                <div class="mod-card-top">
+                    <div class="mod-title-group">
+                        <span class="mod-num">05</span>
+                        <span id="label-feat-revive">FAST REVIVE</span>
+                        <span class="tag-pill-glow tag-new">HOT</span>
+                    </div>
+                    <label class="cyber-switch">
+                        <input type="checkbox" id="feat-revive" checked onchange="handleFeatureToggle()">
+                        <span class="cyber-slider"></span>
+                    </label>
+                </div>
+                <p class="mod-desc" id="desc-feat-revive">picks up a knocked teammate in about 0.1 s instead of 3 s.</p>
+            </div>
+
+            <!-- Mod 06: FAST LANDING (from RezX Modz) -->
+            <div class="mod-card">
+                <div class="mod-card-top">
+                    <div class="mod-title-group">
+                        <span class="mod-num">06</span>
+                        <span id="label-feat-landing">FAST LANDING</span>
+                        <span class="tag-pill-glow tag-inverted">WAYPOINT</span>
+                    </div>
+                    <label class="cyber-switch">
+                        <input type="checkbox" id="feat-landing" onchange="handleFeatureToggle()">
+                        <span class="cyber-slider"></span>
+                    </label>
+                </div>
+                <p class="mod-desc" id="desc-feat-landing">drops you straight onto your saved hot-drop waypoint instead of flight path.</p>
+
+                <div style="font-family:var(--font-mono); font-size:10px; font-weight:800; color:var(--text-faint); letter-spacing:1.5px; margin:14px 0 6px; text-transform:uppercase;">
+                    <span id="label-drop-spot">WAYPOINT HOT-DROP SPOT</span>
+                </div>
+                <div class="drop-spot-grid">
+                    <button type="button" class="hud-pill active" onclick="selectDropSpot(this)">PEAK</button>
+                    <button type="button" class="hud-pill" onclick="selectDropSpot(this)">CLOCK TWR</button>
+                    <button type="button" class="hud-pill" onclick="selectDropSpot(this)">FACTORY</button>
+                    <button type="button" class="hud-pill" onclick="selectDropSpot(this)">BIMASAKTI</button>
+                    <button type="button" class="hud-pill" onclick="selectDropSpot(this)">POCHINOK</button>
+                    <button type="button" class="hud-pill" onclick="selectDropSpot(this)">OBSERVATORY</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 3: MANAGE (Includes WhatsApp Channel) ==================== -->
+        <div id="tab-manage" class="tab-pane" style="display:none;">
+            <!-- Header Bar -->
+            <div class="top-header">
+                <div class="brand-title-badge">MANAG<span class="brand-glow">E</span></div>
+                <div class="top-ctrls">
+                    <button type="button" class="ctrl-btn bell-btn-wrap" onclick="openModalUpdates()" title="Update Notes (v1.7)">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        <span class="bell-badge-dot"></span>
+                    </button>
+                    <div class="lang-chip" onclick="cycleLanguage()" title="Switch Language (EN / TH / AR)" style="cursor:pointer;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="current-lang-label">EN</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THIS DEVICE CARD (Inspired by RezX Modz) -->
+            <div style="font-family:var(--font-mono); font-size:11px; font-weight:800; color:var(--text-faint); letter-spacing:1.5px; margin:16px 4px 10px; text-transform:uppercase;">
+                <span id="label-this-device">DEVICE BINDING</span>
+            </div>
+            <div class="device-box">
+                <div class="device-box-top">
+                    <div style="font-family:var(--font-mono); font-size:11px; font-weight:800; color:var(--neon-cyan); letter-spacing:1px; text-transform:uppercase;">
+                        THIS DEVICE
+                    </div>
+                    <span id="device-bind-status" class="device-status-badge badge-locked">LOCKED TO THIS KEY</span>
+                </div>
+                <div class="device-info-name">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    <span id="manage-device-model">Apple iPhone · iOS 17.5</span>
+                </div>
+                <div class="device-info-hwid">
+                    HWID: <span id="manage-device-hwid">dev-loading-identifier</span>
+                </div>
+                <button type="button" id="btn-trigger-reset" class="btn-reset-device" onclick="openResetModal()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    <span id="btn-reset-text">RESET DEVICE</span>
+                </button>
+            </div>
+
+            <!-- UPDATE NOTES CARD -->
+            <div class="action-link-card" onclick="openModalUpdates()" style="border-color: rgba(255, 19, 91, 0.35);">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="color:var(--neon-pink);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        </span>
+                        <span id="label-changelog-card">UPDATE NOTES (v1.7)</span>
+                        <span class="tag-pill-glow tag-new" style="margin:0;">LATEST</span>
+                    </div>
+                    <span class="card-sub-url">view combat tweaks, aim lag &amp; patch history</span>
+                </div>
+                <span class="arrow-glyph">&rarr;</span>
+            </div>
+
+            <div style="font-family:var(--font-mono); font-size:11px; font-weight:800; color:var(--text-faint); letter-spacing:1.5px; margin:16px 4px 12px; text-transform:uppercase;">
+                COMMUNITY &amp; APPS
+            </div>
+
+            <!-- WHATSAPP CHANNEL (Standard & Clean) -->
+            <a href="https://whatsapp.com/channel/0029VbDu0Td96H4VbSt1Ss3f" target="_blank" rel="noopener" class="action-link-card">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="color:#25D366;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-2px; margin-right:4px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </span>
+                        <span>WHATSAPP CHANNEL</span>
+                    </div>
+                    <span class="card-sub-url">join for updates &bull; whatsapp.com/channel/0029VbDu0Td96H4VbSt1Ss3f</span>
+                </div>
+                <span class="arrow-glyph">&rarr;</span>
+            </a>
+
+            <!-- Card 00A: 1-TAP CLIPBOARD COPY (RECOMMENDED FOR HIDDIFY) -->
+            <a href="/copy" class="action-link-card" style="border:2px solid #00f5d4; background:linear-gradient(135deg, rgba(0,245,212,0.25) 0%, rgba(255,19,91,0.2) 100%); box-shadow: 0 0 25px rgba(0,245,212,0.35);">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="background:#00f5d4; color:#000; font-weight:900; padding:2px 6px; border-radius:4px; font-size:11px;">EASIEST</span>
+                        <span style="color:#fff; font-weight:800; font-size:14px; letter-spacing:0.5px;">📋 1-TAP COPY AIMBOT CONFIG</span>
+                    </div>
+                    <span class="card-sub-url" style="color:#6ee7b7; font-weight:700;">Tap to Copy • Open Hiddify • Tap (+) Add From Clipboard!</span>
+                </div>
+                <span class="arrow-glyph" style="color:#00f5d4; font-weight:900; font-size:18px;">&rarr;</span>
+            </a>
+
+            <!-- Card 00B: DOWNLOAD AIMBOT CONFIG (.JSON - 100% Selectable in Hiddify) -->
+            <a href="/download/RezX_Auto_Headshot_Aimbot.json" download="RezX_Auto_Headshot_Aimbot.json" class="action-link-card" style="border:1px solid rgba(0, 245, 212, 0.6); background:rgba(0, 245, 212, 0.08);">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="background:#3b82f6; color:#fff; font-weight:900; padding:2px 6px; border-radius:4px; font-size:11px;">JSON</span>
+                        <span style="color:#fff; font-weight:700; font-size:13px;">🎯 DOWNLOAD AIMBOT FILE (.JSON)</span>
+                    </div>
+                    <span class="card-sub-url" style="color:#93c5fd;">Android File Picker me 100% Selectable • Zero Grey-Out</span>
+                </div>
+                <span class="arrow-glyph" style="color:#3b82f6; font-weight:900;">&darr;</span>
+            </a>
+
+            <!-- Card 00C: DOWNLOAD AIMBOT CONFIG (.TXT) -->
+            <a href="/download/RezX_Auto_Headshot_Aimbot.txt" download="RezX_Auto_Headshot_Aimbot.txt" class="action-link-card" style="border:1px solid rgba(255, 19, 91, 0.5); background:rgba(255, 19, 91, 0.08);">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="background:#ff135b; color:#fff; font-weight:900; padding:2px 6px; border-radius:4px; font-size:11px;">TXT</span>
+                        <span style="color:#fff; font-weight:700; font-size:13px;">🎯 DOWNLOAD AIMBOT FILE (.TXT)</span>
+                    </div>
+                    <span class="card-sub-url" style="color:#fda4af;">Selectable in all Android File Managers</span>
+                </div>
+                <span class="arrow-glyph" style="color:#ff135b; font-weight:900;">&darr;</span>
+            </a>
+
+            <!-- Card 01: DOWNLOAD REZX MODZ APK (Hiddify Engine) -->
+            <a href="/download/RezX_Modz.apk" download class="action-link-card" style="border:1px solid rgba(255, 42, 109, 0.6); background:linear-gradient(135deg, rgba(255,42,109,0.15) 0%, rgba(5,217,232,0.1) 100%);">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="color:var(--neon-pink); font-weight:900;">APK</span>
+                        <span style="color:#fff; font-weight:700;">DOWNLOAD REZX MODZ APK</span>
+                    </div>
+                    <span class="card-sub-url" style="color:var(--neon-cyan);">Android APK (Hiddify Engine) &bull; Direct Download</span>
+                </div>
+                <span class="arrow-glyph" style="color:var(--neon-cyan); font-weight:900;">&darr;</span>
+            </a>
+
+            <!-- Card 02: HIDDIFY FOR ANDROID -->
+            <a href="https://github.com/hiddify/hiddify-app/releases/latest" target="_blank" rel="noopener" class="action-link-card">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="color:var(--neon-pink);">02</span>
+                        <span>HIDDIFY FOR ANDROID</span>
+                    </div>
+                    <span class="card-sub-url">github.com / Google Play</span>
+                </div>
+                <span class="arrow-glyph">&rarr;</span>
+            </a>
+
+            <!-- Card 03: HIDDIFY FOR IOS -->
+            <a href="https://apps.apple.com/app/hiddify-proxy-vpn/id6596777532" target="_blank" rel="noopener" class="action-link-card">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="color:var(--neon-pink);">03</span>
+                        <span>HIDDIFY FOR IOS</span>
+                    </div>
+                    <span class="card-sub-url">apps.apple.com</span>
+                </div>
+                <span class="arrow-glyph">&rarr;</span>
+            </a>
+
+            <!-- Card 03: GETTING STARTED -->
+            <div class="action-link-card" onclick="openModalGuide()">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="color:var(--neon-pink);">04</span>
+                        <span>GETTING STARTED</span>
+                    </div>
+                    <span class="card-sub-url">setup instructions</span>
+                </div>
+                <span class="arrow-glyph">&rarr;</span>
+            </div>
+
+            <!-- Card 04: LOGOUT / SWITCH KEY -->
+            <div class="action-link-card danger-card" onclick="handleLogout()">
+                <div class="card-text-block">
+                    <div class="card-header-line">
+                        <span style="color:#f43f5e;">04</span>
+                        <span>LOGOUT / SWITCH KEY</span>
+                    </div>
+                    <span class="card-sub-url" style="color:#f43f5e;">exit session &amp; enter another key</span>
+                </div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            </div>
+        </div>
+
+        <!-- ==================== FIXED FLOATING DOCK ==================== -->
+        <nav class="dock-nav">
+            <button type="button" class="dock-item active" id="nav-btn-home" onclick="switchTab('home')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>HOME</span>
+                <span class="dock-active-glow"></span>
+            </button>
+            <button type="button" class="dock-item" id="nav-btn-features" onclick="switchTab('features')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <span>FEATURES</span>
+                <span class="dock-active-glow"></span>
+            </button>
+            <button type="button" class="dock-item" id="nav-btn-manage" onclick="switchTab('manage')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <span>MANAGE</span>
+                <span class="dock-active-glow"></span>
+            </button>
+        </nav>
+
+    </div>
+</div>
+
+<script>
+const IS_REZX = true;
+const BRAND_NAME = "RezX Modz";
+const BRAND_SHORT = "RezX";
+const BRAND_UPPER = "REZX";
+const BRAND_VIP_CONNECTED = "REZX VIP CONNECTED (\u26a1 BEST LOWEST PING)";
+const BRAND_DEVICE_DEFAULT = "RezX \u00b7 Android";
+const STORAGE_KEY = "rezx_session_v4";
+const APK_PACKAGE = IS_REZX ? 'com.rezx.modz' : 'baby.zerox.modz';
+
+let clientBestServer = 'ind';
+function probeFastestServer() {
+    const candidateNodes = [
+        { id: 'ind', domain: 'proxy-ind.dripwire.cc' },
+        { id: 'sg',  domain: 'proxy-sg.dripwire.cc' },
+        { id: 'eu',  domain: 'proxy-eu.dripwire.cc' },
+        { id: 'br',  domain: 'proxy-br.dripwire.cc' },
+        { id: 'bd',  domain: 'proxy-bd.dripwire.cc' }
+    ];
+    candidateNodes.forEach(node => {
+        const img = new Image();
+        const start = performance.now();
+        let finished = false;
+        const timer = setTimeout(() => { finished = true; }, 2000);
+        img.onload = img.onerror = () => {
+            if (finished) return;
+            finished = true;
+            clearTimeout(timer);
+            node.ms = performance.now() - start;
+            const valid = candidateNodes.filter(n => n.ms !== undefined).sort((a, b) => a.ms - b.ms);
+            if (valid.length > 0) {
+                clientBestServer = valid[0].id;
+            }
+        };
+        img.src = `http://${node.domain}:80/ping?_=${Date.now()}`;
+    });
+}
+
+let currentSession = null;
+let timerInterval = null;
+
+function getDeviceId() {
+    let devId = localStorage.getItem('rezx_device_id') || localStorage.getItem('zerox_device_id');
+    if (!devId) {
+        devId = 'dev-' + Math.random().toString(36).substring(2, 10) + '-' + Date.now().toString(36);
+        localStorage.setItem('rezx_device_id', devId); localStorage.setItem('zerox_device_id', devId);
+    }
+    return devId;
+}
+
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toast-text');
+    toastText.textContent = msg;
+    toast.classList.add('show');
+    if (navigator.vibrate) navigator.vibrate(15);
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2800);
+}
+
+async function pasteKeyToInput() {
+    try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+            document.getElementById('unlock-key-input').value = text.trim();
+            showToast('Key pasted from clipboard!');
+        }
+    } catch (e) {
+        showToast('Please paste manually');
+    }
+}
+
+async function handleUnlock(e) {
+    e.preventDefault();
+    const keyInput = document.getElementById('unlock-key-input');
+    const btn = document.getElementById('unlock-btn');
+    const key = keyInput.value.trim();
+
+    if (!key) {
+        showToast('Please enter your access key');
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'CONNECTING TO MATRIX…';
+
+    try {
+        const devInfo = getDeviceDetails();
+        const resp = await fetch('api/connect.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                license_key: key,
+                device_id: getDeviceId(),
+                device_model: devInfo.model,
+                device_os: devInfo.os,
+                server: 'all'
+            })
+        });
+
+        const data = await resp.json();
+
+        if (data.status === 'success') {
+            currentSession = {
+                key: key,
+                expires_at: data.expires_at,
+                expires_timestamp: data.expires_timestamp,
+                token: data.token,
+                encrypted_link: data.encrypted_link,
+                happ_rage_crypt5: data.happ_rage_crypt5 || '',
+                happ_legit_crypt5: data.happ_legit_crypt5 || '',
+                nodes_count: 1,
+                bound_device: data.bound_device || null,
+                can_reset: (data.can_reset !== undefined) ? data.can_reset : true,
+                reset_cooldown_left: data.reset_cooldown_left || 0,
+                activated_date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(currentSession));
+            localStorage.setItem('zerox_session_v4', JSON.stringify(currentSession));
+            localStorage.setItem('rezx_session_v4', JSON.stringify(currentSession));
+            localStorage.removeItem('zerox_session_v3');
+            localStorage.removeItem('zerox_session_v2');
+            showToast(`${BRAND_NAME} Suite Unlocked!`);
+            renderDashboard();
+        } else {
+            showToast(data.message || 'Key verification failed');
+        }
+    } catch (err) {
+        showToast('Server connection error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = `UNLOCK ${BRAND_UPPER} ACCESS`;
+    }
+}
+
+function renderDashboard() {
+    document.getElementById('screen-unlock').style.display = 'none';
+    document.getElementById('screen-dashboard').style.display = 'block';
+
+    const s = currentSession;
+    if (!s) return;
+
+    document.getElementById('display-key').textContent = s.key;
+    document.getElementById('meta-activated').textContent = s.activated_date || '12 Nov 2026';
+
+    if (s.expires_timestamp) {
+        const expDate = new Date(s.expires_timestamp * 1000);
+        document.getElementById('meta-expires').textContent = expDate.toISOString().replace('T', ' ').substring(0, 19);
+    } else {
+        document.getElementById('meta-expires').textContent = 'LIFETIME ' + BRAND_UPPER;
+    }
+
+    const countTag = document.getElementById('servers-count-tag');
+    if (countTag) countTag.textContent = BRAND_VIP_CONNECTED;
+
+    const devTag = document.getElementById('meta-device');
+    if (devTag) devTag.textContent = (s.bound_device && s.bound_device.device_name) ? s.bound_device.device_name : BRAND_DEVICE_DEFAULT;
+
+    switchTab('home');
+    updateDeviceCard();
+    applyLanguage(currentLang);
+    startCountdown();
+    probeFastestServer();
+}
+
+function startCountdown() {
+    if (timerInterval) clearInterval(timerInterval);
+
+    const countdownVal = document.getElementById('countdown-val');
+    const gaugeBar = document.getElementById('gauge-progress');
+    const totalCircumference = 264; // 2 * PI * 42
+
+    function updateTimer() {
+        if (!currentSession || !currentSession.expires_timestamp) {
+            countdownVal.textContent = 'LIFETIME';
+            gaugeBar.style.strokeDashoffset = '0';
+            return;
+        }
+
+        const now = Math.floor(Date.now() / 1000);
+        const diff = currentSession.expires_timestamp - now;
+
+        if (diff <= 0) {
+            countdownVal.textContent = 'EXPIRED';
+            gaugeBar.style.strokeDashoffset = totalCircumference.toString();
+            return;
+        }
+
+        const days = Math.floor(diff / 86400);
+        const hours = Math.floor((diff % 86400) / 3600);
+        const minutes = Math.floor((diff % 3600) / 60);
+        const seconds = diff % 60;
+
+        if (days > 0) {
+            countdownVal.textContent = `${days}D ${hours}H`;
+        } else {
+            countdownVal.textContent = `${hours}H ${minutes}M ${seconds}S`;
+        }
+
+        const progressPercent = Math.min(Math.max(diff / (30 * 86400), 0.05), 1);
+        const offset = totalCircumference * (1 - progressPercent);
+        gaugeBar.style.strokeDashoffset = offset.toString();
+    }
+
+    updateTimer();
+    timerInterval = setInterval(updateTimer, 1000);
+}
+
+function copyCurrentKey() {
+    if (currentSession && currentSession.key) {
+        navigator.clipboard.writeText(currentSession.key).then(() => {
+            showToast('Key copied to clipboard!');
+        });
+    }
+}
+
+async function copyHiddifyLink() {
+    if (!currentSession || !currentSession.key) {
+        showToast('Please unlock your key first');
+        return;
+    }
+
+    try {
+        const token = getActiveToken();
+        const key = currentSession.key;
+        const authParam = token ? `token=${encodeURIComponent(token)}` : `key=${encodeURIComponent(key)}`;
+        const resp = await fetch(`api/encrypt.php?type=rage&${authParam}&server=${clientBestServer}&_=${Date.now()}`);
+        const data = await resp.json();
+        const link = data.crypt_url || currentSession.encrypted_link;
+        if (link) {
+            navigator.clipboard.writeText(link).then(() => {
+                showToast(`${BRAND_NAME} Secure Subscription Copied!`);
+            });
+            return;
+        }
+    } catch (e) {}
+
+    const token = getActiveToken();
+    const key = currentSession.key;
+    const authParam = token ? `token=${encodeURIComponent(token)}` : `key=${encodeURIComponent(key)}`;
+    const fallbackLink = `${window.location.origin}/api/config.php?${authParam}&server=${clientBestServer}&hide-settings=1#hide-settings=1`;
+    navigator.clipboard.writeText(fallbackLink).then(() => {
+        showToast(`${BRAND_NAME} Subscription Copied!`);
+    });
+}
+
+function getActiveTokenRezX() {
+    if (window.currentSession && window.currentSession.token) {
+        return window.currentSession.token;
+    }
+    try {
+        const saved = JSON.parse(localStorage.getItem('rezx_session_v4') || '{}');
+        if (saved && saved.token) return saved.token;
+    } catch (e) {}
+    return '';
+}
+
+async function launchHappyLegit() {
+    if (!currentSession || !currentSession.key) {
+        showToast('Please unlock your key first');
+        return;
+    }
+    const token = getActiveToken();
+    const key = currentSession.key;
+    showToast('Securing & importing Legit Aimbot into Happy Proxy…');
+    if (navigator.vibrate) navigator.vibrate(15);
+
+    try {
+        const authParam = token ? `token=${encodeURIComponent(token)}` : `key=${encodeURIComponent(key)}`;
+        const resp = await fetch(`/api/encrypt.php?type=legit&${authParam}`);
+        const data = await resp.json();
+        if (data && data.crypt_url && ((data.crypt_url.startsWith('happ://crypt5/') || data.crypt_url.startsWith('happ://add/')) || data.crypt_url.startsWith('happ://add/'))) {
+            const finalCrypt = data.crypt_url;
+            if (currentSession) currentSession.happ_legit_crypt5 = finalCrypt;
+            window.location.href = finalCrypt;
+            return;
+        }
+    } catch (e) {}
+
+    if (currentSession && currentSession.happ_legit_crypt5 && currentSession.happ_legit_crypt5.startsWith('happ://crypt5/')) {
+        window.location.href = currentSession.happ_legit_crypt5;
+        return;
+    }
+
+    const authParam = token ? `token=${encodeURIComponent(token)}` : `key=${encodeURIComponent(key)}`;
+    const subUrl = `${window.location.origin}/api/config.php?${authParam}&hide-settings=1#hide-settings=1`;
+    window.location.href = `happ://add/${subUrl}`;
+}
+
+function getActiveToken() {
+    if (window.currentSession && window.currentSession.token) {
+        return window.currentSession.token;
+    }
+    try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || localStorage.getItem('zerox_session_v4') || localStorage.getItem('rezx_session_v4') || localStorage.getItem('zerox_session_v3') || localStorage.getItem('rezx_session_v3') || '{}');
+        if (saved && saved.token) return saved.token;
+    } catch (e) {}
+    return '';
+}
+
+function getWebBrandName() { return BRAND_NAME; 
+    const host = window.location.hostname.toLowerCase();
+    return host.includes('rezx') ? 'RezX Modz' : 'ZeroX Modz';
+}
+
+function getApkPackageName() { return APK_PACKAGE; 
+    const host = window.location.hostname.toLowerCase();
+    return host.includes('rezx') ? 'com.rezx.modz' : 'baby.zerox.modz';
+}
+
+async function launchHappy() {
+    if (!currentSession || !currentSession.key) {
+        showToast('Please login with a valid license key');
+        return;
+    }
+    const token = getActiveToken();
+    const key = currentSession.key;
+    const brand = BRAND_NAME;
+    showToast(`Securing encrypted VIP link for ${brand}…`);
+    if (navigator.vibrate) navigator.vibrate(15);
+
+    if (false) {
+        window.location.href = currentSession.happ_rage_crypt5;
+        return;
+    }
+
+    try {
+        const authParam = token ? `token=${encodeURIComponent(token)}` : `key=${encodeURIComponent(key)}`;
+        const srv = window.clientBestServer || 'ind';
+        const resp = await fetch(`api/encrypt.php?type=rage&${authParam}&server=${srv}&_=${Date.now()}`);
+        const data = await resp.json();
+        if (data && data.crypt_url && (data.crypt_url.startsWith('happ://crypt5/') || data.crypt_url.startsWith('happ://add/'))) {
+            if (currentSession) currentSession.happ_rage_crypt5 = data.crypt_url;
+            try { localStorage.setItem('zerox_session_v3', JSON.stringify(currentSession)); } catch(e){}
+            window.location.href = data.crypt_url;
+            return;
+        }
+    } catch (e) {}
+
+    showToast('Encrypting VIP subscription, please wait a moment...');
+    setTimeout(async () => {
+        try {
+            const authParam = token ? `token=${encodeURIComponent(token)}` : `key=${encodeURIComponent(key)}`;
+            const srv = window.clientBestServer || 'ind';
+        const resp = await fetch(`api/encrypt.php?type=rage&${authParam}&server=${srv}&_=${Date.now()}`);
+            const data = await resp.json();
+            if (data && data.crypt_url && (data.crypt_url.startsWith('happ://crypt5/') || data.crypt_url.startsWith('happ://add/'))) {
+                if (currentSession) currentSession.happ_rage_crypt5 = data.crypt_url;
+                window.location.href = data.crypt_url;
+                return;
+            }
+        } catch (e) {}
+        showToast('Could not reach Happ crypto service. Please try again.');
+    }, 1200);
+}
+
+function launchApk() {
+    if (!currentSession || !currentSession.key) {
+        showToast('Please login with a valid license key');
+        return;
+    }
+    const token = getActiveToken();
+    const brand = BRAND_NAME;
+    const pkg = APK_PACKAGE;
+    const subUrl = `${window.location.origin}/sub_rage.php?token=${encodeURIComponent(token)}&format=clash&server=${clientBestServer}&hide-settings=1`;
+
+    showToast(`Importing ⚡ Best Server into ${brand} Apk…`);
+    if (navigator.vibrate) navigator.vibrate(15);
+
+    const intentHiddify = `intent://import/${subUrl}#${brand}#Intent;scheme=hiddify;package=${pkg};end`;
+    const directScheme = `hiddify://import/${subUrl}#${brand}`;
+
+    window.location.href = intentHiddify;
+    setTimeout(() => {
+        window.location.href = directScheme;
+    }, 400);
+}
+
+// Global active launch aliases
+window.launchHappy = launchHappy;
+window.launchApk = launchApk;
+window.launchHappyRage = launchHappy;
+window.launchZeroXRage = launchApk;
+window.launchRezXRage = launchApk;
+window.launchHappyLegit = launchHappy;
+window.launchZeroXLegit = launchApk;
+window.launchRezXLegit = launchApk;
+window.launchHiddifyApp = launchApk;
+window.launchHappApp = launchHappy;
+
+function switchTab(tabName) {
+    if (navigator.vibrate) navigator.vibrate(10);
+
+    const tabs = ['home', 'features', 'manage'];
+    tabs.forEach(t => {
+        const el = document.getElementById(`tab-${t}`);
+        const btn = document.getElementById(`nav-btn-${t}`);
+        if (el) {
+            const isActive = (t === tabName);
+            el.style.display = isActive ? 'block' : 'none';
+            el.classList.toggle('active', isActive);
+        }
+        if (btn) btn.classList.toggle('active', t === tabName);
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Multi-Language Dictionary (Inspired by RezX Modz: EN, TH, AR)
+const I18N = {
+    en: {
+        brand: 'REZX',
+        home: 'HOME',
+        features: 'FEATURES',
+        manage: 'MANAGE',
+        updates: 'UPDATE NOTES',
+        f_marker: 'MARKER',
+        d_marker: 'marks every enemy on your screen with real-time locator tags.',
+        mark_style: 'MARK STYLE',
+        f_aimpoint: 'AIMPOINT',
+        d_aimpoint: 'moves your aim from the chest to the neck, so body shots land as headshots.',
+        f_aimlag: 'AIM LAG',
+        d_aimlag: 'freezes the enemy for a moment while you fire or scope, so they\'re easier to hit.',
+        f_gloo: 'GLOO WALL ROTATION',
+        d_gloo: 'turns your gloo wall to the angle you set for instant rear or flank defence.',
+        wall_angle: 'WALL ANGLE',
+        f_revive: 'FAST REVIVE',
+        d_revive: 'picks up a knocked teammate in about 0.1 s instead of 3 s.',
+        f_landing: 'FAST LANDING',
+        d_landing: 'drops you straight onto your saved hot-drop waypoint instead of flight path.',
+        drop_spot: 'WAYPOINT HOT-DROP SPOT',
+        this_device: 'DEVICE BINDING',
+        reset_device: 'RESET DEVICE',
+        toast_synced: 'Match settings synchronized',
+    },
+    th: {
+        brand: 'REZX',
+        home: 'หน้าหลัก',
+        features: 'ฟังก์ชัน',
+        manage: 'จัดการ',
+        updates: 'บันทึกอัปเดต',
+        f_marker: 'มาร์กเกอร์ (ESP)',
+        d_marker: 'แสดงตำแหน่งศัตรูทุกคนบนหน้าจอด้วยแท็กระบุแบบเรียลไทม์',
+        mark_style: 'รูปแบบมาร์ก',
+        f_aimpoint: 'เอมพอยต์ (เล็งคอ)',
+        d_aimpoint: 'ย้ายเป้าเล็งจากลำตัวขึ้นไปที่คอ เพื่อให้ยิงโดนหัวติดแดงทุกนัด',
+        f_aimlag: 'เอมแล็ก (หยุดศัตรู)',
+        d_aimlag: 'ทำให้ศัตรูหยุดนิ่งชั่วขณะเมื่อคุณกดยิงหรือเปิดสโคป เพื่อให้ยิงโดนง่ายขึ้น',
+        f_gloo: 'มุมหมุนไอซ์วอลล์',
+        d_gloo: 'หมุนไอซ์วอลล์ไปตามองศาที่คุณกำหนดเพื่อป้องกันหลังทันที',
+        wall_angle: 'องศาไอซ์วอลล์',
+        f_revive: 'ชุบเพื่อนเร่งด่วน',
+        d_revive: 'ชุบชีวิตเพื่อนร่วมทีมที่ล้มในเวลาประมาณ 0.1 วินาที แทนที่จะเป็น 3 วินาที',
+        f_landing: 'ดรอปเร่งด่วน',
+        d_landing: 'พุ่งดิ่งลงสู่จุดแลนด์มาร์กที่คุณบันทึกไว้ เช่น พีค (Peak) ทันที',
+        drop_spot: 'จุดดรอปแลนด์มาร์ก',
+        this_device: 'การผูกอุปกรณ์',
+        reset_device: 'รีเซ็ตอุปกรณ์',
+        toast_synced: 'บันทึกการตั้งค่าการแข่งขันแล้ว',
+    },
+    ar: {
+        brand: 'REZX',
+        home: 'الرئيسية',
+        features: 'المميزات',
+        manage: 'الإدارة',
+        updates: 'سجل التحديثات',
+        f_marker: 'تحديد الأماكن (كشف)',
+        d_marker: 'يحدد كل عدو على شاشتك بمؤشرات تعقب مباشرة.',
+        mark_style: 'نمط العلامة',
+        f_aimpoint: 'نقطة الهدف (Aimpoint)',
+        d_aimpoint: 'ينقل التصويب من الصدر إلى الرقبة لتتحول كل الرصاصات إلى هيد شوت.',
+        f_aimlag: 'تجميد الخصم (Aim Lag)',
+        d_aimlag: 'يجمد الخصم للحظة أثناء إطلاق النار أو فتح السكوب لتسهيل إصابته.',
+        f_gloo: 'دوران جدار الثلج',
+        d_gloo: 'يدير جدار الثلج للزاوية المحددة لتوفير حماية خلفية فورية.',
+        wall_angle: 'زاوية الجدار',
+        f_revive: 'إنعاش فائق السرعة',
+        d_revive: 'إنعاش الصديق الساقط في حوالي 0.1 ثانية بدلاً من 3 ثوانٍ.',
+        f_landing: 'نزول سريع مباشر',
+        d_landing: 'نزول مباشر ودقيق على النقطة المحددة مسبقاً مثل Peak.',
+        drop_spot: 'نقطة الهبوط السريع',
+        this_device: 'ربط الجهاز',
+        reset_device: 'إعادة تعيين الجهاز',
+        toast_synced: 'تمت مزامنة إعدادات المباراة',
+    }
+};
+
+let currentLang = localStorage.getItem('rezx_lang') || localStorage.getItem('zerox_lang') || 'en';
+
+function cycleLanguage() {
+    const langs = ['en', 'th', 'ar'];
+    const nextIdx = (langs.indexOf(currentLang) + 1) % langs.length;
+    currentLang = langs[nextIdx];
+    localStorage.setItem('rezx_lang', currentLang);
+    applyLanguage(currentLang);
+    showToast(`Language: ${currentLang.toUpperCase()}`);
+}
+
+function applyLanguage(lang) {
+    const t = I18N[lang] || I18N.en;
+    document.querySelectorAll('.current-lang-label').forEach(el => el.textContent = lang.toUpperCase());
+
+    const map = {
+        'label-feat-gloo': t.f_gloo,
+        'desc-feat-gloo': t.d_gloo,
+        'label-wall-angle': t.wall_angle,
+        'label-feat-revive': t.f_revive,
+        'desc-feat-revive': t.d_revive,
+        'label-feat-landing': t.f_landing,
+        'desc-feat-landing': t.d_landing,
+        'label-drop-spot': t.drop_spot,
+        'label-this-device': t.this_device,
+        'btn-reset-text': t.reset_device,
+    };
+    for (const [id, val] of Object.entries(map)) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+    }
+}
+
+function getDeviceDetails() {
+    const ua = navigator.userAgent;
+    let os = 'Android';
+    let model = 'Mobile Device';
+
+    if (/iPhone/i.test(ua)) {
+        os = 'iOS';
+        model = 'Apple iPhone';
+        const m = ua.match(/OS\s*([0-9_]+)/i);
+        if (m) os += ' ' + m[1].replace(/_/g, '.');
+    } else if (/iPad/i.test(ua)) {
+        os = 'iPadOS';
+        model = 'Apple iPad';
+    } else if (/Android/i.test(ua)) {
+        os = 'Android';
+        model = 'Android Device';
+        const m = ua.match(/Android\s*([0-9\.]+)/i);
+        if (m) os += ' ' + m[1];
+        const dev = ua.match(/([A-Z0-9_-]+\s+[A-Z0-9_-]+)\s+Build/i) || ua.match(/;\s*([^;)]+)\s+Build/i);
+        if (dev) model = dev[1].trim();
+    } else if (/Windows/i.test(ua)) {
+        os = 'Windows 11/10';
+        model = 'PC Station';
+    } else if (/Macintosh/i.test(ua)) {
+        os = 'macOS';
+        model = 'Apple Mac';
+    }
+    return { model, os, full: `${model} · ${os}` };
+}
+
+function openModalUpdates() {
+    if (navigator.vibrate) navigator.vibrate(10);
+    document.getElementById('modal-updates').classList.add('active');
+}
+
+function closeModalUpdates() {
+    document.getElementById('modal-updates').classList.remove('active');
+}
+
+function openResetModal() {
+    if (navigator.vibrate) navigator.vibrate(15);
+    document.getElementById('modal-reset-device').classList.add('active');
+}
+
+function closeResetModal() {
+    document.getElementById('modal-reset-device').classList.remove('active');
+}
+
+async function confirmDeviceReset() {
+    const btn = document.getElementById('confirm-reset-btn');
+    btn.disabled = true;
+    btn.textContent = 'UNLINKING…';
+
+    try {
+        const resp = await fetch('api/reset_device.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                license_key: currentSession ? currentSession.key : '',
+                device_id: getDeviceId()
+            })
+        });
+        const data = await resp.json();
+
+        if (resp.ok && data.status === 'success') {
+            closeResetModal();
+            showToast('Device unlinked! Re-enter key on your new device.');
+            localStorage.removeItem('rezx_session_v4');
+            localStorage.removeItem('zerox_session_v3');
+            localStorage.removeItem('zerox_session_v2');
+            currentSession = null;
+            if (timerInterval) clearInterval(timerInterval);
+            setTimeout(() => {
+                document.getElementById('screen-dashboard').style.display = 'none';
+                document.getElementById('screen-unlock').style.display = 'flex';
+            }, 1200);
+        } else if (resp.status === 429) {
+            closeResetModal();
+            showToast(data.message || 'Reset on cooldown (7 days)');
+            if (currentSession) {
+                currentSession.can_reset = false;
+                currentSession.reset_cooldown_left = data.seconds_left || 86400;
+                updateDeviceCard();
+            }
+        } else {
+            showToast(data.message || 'Reset failed');
+        }
+    } catch (e) {
+        showToast('Network error during reset');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'CONFIRM RESET';
+    }
+}
+
+function handleAngleSlider(val) {
+    document.getElementById('gloo-angle-val').textContent = `${val}°`;
+    document.querySelectorAll('.angle-pill').forEach(p => p.classList.remove('active'));
+    localStorage.setItem('rezx_gloo_angle', val);
+}
+
+function setGlooAngle(deg, el) {
+    if (navigator.vibrate) navigator.vibrate(10);
+    document.getElementById('gloo-angle-slider').value = deg;
+    document.getElementById('gloo-angle-val').textContent = `${deg}°`;
+    document.querySelectorAll('.angle-pill').forEach(p => p.classList.remove('active'));
+    if (el) el.classList.add('active');
+    localStorage.setItem('rezx_gloo_angle', deg);
+    showToast(`Gloo Angle: ${deg}°`);
+}
+
+function selectDropSpot(el) {
+    if (navigator.vibrate) navigator.vibrate(10);
+    document.querySelectorAll('.drop-spot-grid .hud-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    localStorage.setItem('rezx_drop_spot', el.textContent);
+    showToast(`Hot-Drop: ${el.textContent}`);
+}
+
+function updateDeviceCard() {
+    const s = currentSession;
+    const dev = getDeviceDetails();
+    const devModelLabel = document.getElementById('manage-device-model');
+    const devHwidLabel = document.getElementById('manage-device-hwid');
+    const resetBtn = document.getElementById('btn-trigger-reset');
+    const resetBtnText = document.getElementById('btn-reset-text');
+
+    if (devModelLabel) {
+        devModelLabel.textContent = (s && s.bound_device && s.bound_device.device_name) ? s.bound_device.device_name : dev.full;
+    }
+    if (devHwidLabel) {
+        devHwidLabel.textContent = getDeviceId();
+    }
+
+    if (resetBtn && s) {
+        if (s.can_reset === false && s.reset_cooldown_left > 0) {
+            const days = Math.floor(s.reset_cooldown_left / 86400);
+            const hours = Math.floor((s.reset_cooldown_left % 86400) / 3600);
+            resetBtn.disabled = true;
+            resetBtnText.textContent = `COOLDOWN: ${days > 0 ? days + 'd ' : ''}${hours}h`;
+        } else {
+            resetBtn.disabled = false;
+            resetBtnText.textContent = (I18N[currentLang] || I18N.en).reset_device;
+        }
+    }
+}
+
+function handleFeatureToggle() {
+    if (navigator.vibrate) navigator.vibrate(12);
+
+    const f1 = document.getElementById('feat-marker').checked ? 1 : 0;
+    const f2 = document.getElementById('feat-aimpoint').checked ? 1 : 0;
+    const f3 = document.getElementById('feat-aimlag').checked ? 1 : 0;
+    const f4 = document.getElementById('feat-gloo') ? (document.getElementById('feat-gloo').checked ? 1 : 0) : 1;
+    const f5 = document.getElementById('feat-revive').checked ? 1 : 0;
+    const f6 = document.getElementById('feat-landing') ? (document.getElementById('feat-landing').checked ? 1 : 0) : 0;
+
+    const totalActive = f1 + f2 + f3 + f4 + f5 + f6;
+    const counter = document.getElementById('features-counter');
+    if (counter) counter.textContent = `${totalActive}/6 ACTIVE`;
+
+    // Persist to local storage
+    const settings = { f1, f2, f3, f4, f5, f6 };
+    localStorage.setItem('rezx_feature_states', JSON.stringify(settings));
+
+    // Real-time synchronization with Dripwire combat engine
+    fetch('/api/features.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            moco: f1,
+            aimbot: f2,
+            freeze_fire: f3,
+            freeze_scope: f3,
+            icewall: f4,
+            revive_type: f5,
+            esp: f1
+        })
+    }).catch(() => {});
+
+    showToast((I18N[currentLang] || I18N.en).toast_synced);
+}
+
+function selectMarkStyle(el) {
+    if (navigator.vibrate) navigator.vibrate(10);
+    document.querySelectorAll('.style-grid .hud-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    const styleName = el.textContent.trim().toUpperCase();
+    localStorage.setItem('rezx_mark_style', styleName);
+
+    const markerMap = {
+        'SHIROU': 3,
+        'MOCO': 1,
+        'CLU': 2,
+        'IRIS': 5,
+        'DREKI': 7,
+        'PHANTOM': 9,
+        'ICE WALL': 11,
+        'DREAMLAND': 14,
+        'ZEROX': 9,
+        'DREAM': 14
+    };
+    const markerVal = markerMap[styleName] || 9;
+    fetch('/api/features.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ marker: markerVal, moco: 1 })
+    }).catch(() => {});
+
+    showToast(`Mark Style: ${styleName} (Active)`);
+}
+
+function handleSubFeature() {
+    if (navigator.vibrate) navigator.vibrate(10);
+    showToast('Trigger mode updated');
+}
+
+function openModalGuide() {
+    document.getElementById('modal-guide').classList.add('active');
+}
+
+function closeModalGuide() {
+    document.getElementById('modal-guide').classList.remove('active');
+}
+
+function handleLogout() {
+    if (confirm('Are you sure you want to exit and switch keys?')) {
+        localStorage.removeItem('zerox_session_v3');
+        currentSession = null;
+        if (timerInterval) clearInterval(timerInterval);
+        document.getElementById('screen-dashboard').style.display = 'none';
+        document.getElementById('screen-unlock').style.display = 'flex';
+        showToast('Session closed');
+    }
+}
+
+function copyWhatsAppLink(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    const waUrl = 'https://whatsapp.com/channel/0029VbDu0Td96H4VbSt1Ss3f';
+    navigator.clipboard.writeText(waUrl).then(() => {
+        showToast('WhatsApp link copied: whatsapp.com/channel/0029VbDu0Td96H4VbSt1Ss3f');
+    }).catch(() => {
+        showToast('WhatsApp: https://whatsapp.com/channel/0029VbDu0Td96H4VbSt1Ss3f');
+    });
+}
+
+// Ambient Cyber-Mote Canvas Animation
+(function initAmbientCyberCanvas() {
+    const canvas = document.getElementById('ambient-cyber-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    });
+
+    const particles = [];
+    const count = 36;
+    const colors = ['#ff135b', '#8b5cf6', '#00f5d4', '#fbbf24'];
+
+    for (let i = 0; i < count; i++) {
+        particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 1.6 + 0.6,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            alpha: Math.random() * 0.5 + 0.2,
+            alphaDir: Math.random() > 0.5 ? 0.006 : -0.006
+        });
+    }
+
+    function renderParticles() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0) p.x = width;
+            if (p.x > width) p.x = 0;
+            if (p.y < 0) p.y = height;
+            if (p.y > height) p.y = 0;
+
+            p.alpha += p.alphaDir;
+            if (p.alpha <= 0.1 || p.alpha >= 0.75) p.alphaDir = -p.alphaDir;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.alpha;
+            ctx.shadowBlur = 6;
+            ctx.shadowColor = p.color;
+            ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(renderParticles);
+    }
+    requestAnimationFrame(renderParticles);
+})();
+
+window.addEventListener('DOMContentLoaded', () => {
+    localStorage.removeItem('zerox_session_v2');
+    const oldV3 = localStorage.getItem('zerox_session_v3');
+    let saved = localStorage.getItem('rezx_session_v4') || localStorage.getItem('zerox_session_v4');
+
+    if (!saved && oldV3) {
+        try {
+            const parsed = JSON.parse(oldV3);
+            if (parsed && parsed.key) {
+                parsed.encrypted_link = '';
+                saved = JSON.stringify(parsed);
+                localStorage.setItem('rezx_session_v4', saved);
+            }
+        } catch (e) {}
+        localStorage.removeItem('zerox_session_v3');
+    }
+
+    const savedStyle = localStorage.getItem('rezx_mark_style') || 'MOCO';
+    document.querySelectorAll('.style-grid .hud-pill').forEach(p => {
+        if (p.textContent.trim().toUpperCase() === savedStyle.toUpperCase()) {
+            p.classList.add('active');
+        } else {
+            p.classList.remove('active');
+        }
+    });
+
+    if (saved) {
+        try {
+            currentSession = JSON.parse(saved);
+            renderDashboard();
+
+            if (currentSession && currentSession.key) {
+                const devInfo = getDeviceDetails();
+                fetch('api/connect.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        license_key: currentSession.key,
+                        device_id: getDeviceId(),
+                        device_model: devInfo.model,
+                        device_os: devInfo.os,
+                        server: 'all'
+                    })
+                }).then(r => r.json()).then(data => {
+                    if (data.status === 'success' && data.encrypted_link) {
+                        currentSession.encrypted_link = data.encrypted_link;
+                        currentSession.token = data.token;
+                        currentSession.nodes_count = data.nodes_count || 4;
+                        localStorage.setItem('rezx_session_v4', JSON.stringify(currentSession));
+                    }
+                }).catch(() => {});
+            }
+        } catch (e) {
+            document.getElementById('screen-unlock').style.display = 'flex';
+        }
+    } else {
+        document.getElementById('screen-unlock').style.display = 'flex';
+    }
+});
+</script>
+</body>
+</html>

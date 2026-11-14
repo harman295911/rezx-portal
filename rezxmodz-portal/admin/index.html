@@ -1,0 +1,2765 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#07070a">
+    <meta name="referrer" content="no-referrer">
+    <title>RezX Modz — License Command Center</title>
+    <!-- High-Performance Non-Blocking Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Rajdhani:wght@700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Rajdhani:wght@700;800&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Rajdhani:wght@700;800&display=swap">
+    </noscript>
+    <style>
+        :root {
+            --bg: #07070a;
+            --surface: #0e0e14;
+            --surface-hover: #14141e;
+            --surface-border: #1e1e2c;
+            --border-highlight: #34344c;
+            --text-main: #f4f4f7;
+            --text-muted: #83839c;
+            --primary: #ffffff;
+            --accent: #a855f7;
+            --accent-glow: rgba(168, 85, 247, 0.45);
+            --green: #10b981;
+            --green-glow: rgba(16, 185, 129, 0.25);
+            --amber: #f59e0b;
+            --amber-glow: rgba(245, 158, 11, 0.25);
+            --red: #ef4444;
+            --red-glow: rgba(239, 68, 68, 0.25);
+            --purple: #a855f7;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', Consolas, monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 255, 0, 0.01));
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.5;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button, input, select, textarea { font-family: inherit; }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--surface-border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--border-highlight); }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            background: rgba(14, 14, 20, 0.95);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--surface-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            min-height: 64px;
+            box-sizing: border-box;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+        .brand-logo-img {
+            height: 32px;
+            width: 32px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+        .brand-badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            padding: 3px 8px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: var(--radius-sm);
+            color: #d8b4fe;
+            letter-spacing: 0.08em;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .nav-actions .btn {
+            flex-shrink: 0;
+            margin: 2px 0;
+        }
+        
+        /* User & Credit Badges */
+        .user-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-family: var(--font-mono);
+            border: 1px solid transparent;
+        }
+        .user-pill.role-owner {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.25));
+            border-color: rgba(245, 158, 11, 0.45);
+            color: #fbbf24;
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+        }
+        .user-pill.role-admin {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(147, 51, 234, 0.25));
+            border-color: rgba(168, 85, 247, 0.45);
+            color: #c084fc;
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+        }
+        .user-pill.role-reseller {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(14, 165, 233, 0.25));
+            border-color: rgba(56, 189, 248, 0.45);
+            color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+        }
+
+        .credit-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.25));
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+        }
+        .credit-pill.credit-warning {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.4);
+            color: #fbbf24;
+        }
+        .credit-pill.credit-danger {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #f87171;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--text-main);
+            white-space: nowrap;
+        }
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            font-weight: 700;
+        }
+        .btn-primary:hover {
+            filter: brightness(1.15);
+            background: #f8fafc;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn-secondary {
+            background: var(--surface);
+            border-color: var(--surface-border);
+            color: var(--text-main);
+        }
+        .btn-secondary:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-highlight);
+        }
+        .btn-purple {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: rgba(168, 85, 247, 0.4);
+            color: #d8b4fe;
+        }
+        .btn-purple:hover {
+            background: rgba(168, 85, 247, 0.28);
+            border-color: var(--purple);
+            color: #ffffff;
+        }
+        .btn-amber {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.4);
+            color: #fcd34d;
+        }
+        .btn-amber:hover {
+            background: rgba(245, 158, 11, 0.25);
+            border-color: var(--amber);
+            color: #ffffff;
+        }
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.12);
+            border-color: rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+        }
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.25);
+            border-color: var(--red);
+            color: #fff;
+        }
+        .btn-sm {
+            padding: 5px 11px;
+            font-size: 12px;
+        }
+
+        /* Banner */
+        .banner-warning {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+            border-bottom: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 10px 28px;
+            font-size: 13px;
+            color: #fef3c7;
+        }
+        .banner-reseller {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.12), rgba(56, 189, 248, 0.03));
+            border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 10px 28px;
+            font-size: 13px;
+            color: #bae6fd;
+        }
+
+        .container {
+            width: min(100% - 48px, 1320px);
+            margin: 28px auto 60px;
+            flex: 1;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        .stat-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: var(--card-accent, #fff);
+            opacity: 0.8;
+        }
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .stat-val {
+            font-size: 28px;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            margin-top: 6px;
+            color: var(--text-main);
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .filter-group {
+            display: flex;
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-sm);
+            padding: 3px;
+            gap: 2px;
+        }
+        .filter-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .filter-btn.active {
+            background: #ffffff;
+            color: #000000;
+        }
+        .search-box {
+            position: relative;
+            min-width: 260px;
+            max-width: 380px;
+            flex: 1;
+        }
+        .search-input {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px 8px 34px;
+            color: var(--text-main);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+        .search-icon {
+            position: absolute;
+            left: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+        .creator-select {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-sm);
+            padding: 7px 12px;
+            color: var(--text-main);
+            font-size: 12px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Table Card */
+        .table-card {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        thead th {
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--surface-border);
+            font-weight: 700;
+        }
+        tbody td {
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 13px;
+            vertical-align: middle;
+        }
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Key Badges */
+        .key-badge {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 5px 10px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .copy-icon-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 2px;
+            display: flex;
+            transition: color 0.15s;
+        }
+        .copy-icon-btn:hover { color: #ffffff; }
+
+        /* Status Pills */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-family: var(--font-mono);
+        }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        .status-unused {
+            background: rgba(56, 189, 248, 0.12);
+            color: #7dd3fc;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .status-unused .status-dot { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+        .status-active {
+            background: rgba(16, 185, 129, 0.12);
+            color: #6ee7b7;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .status-active .status-dot { background: #10b981; box-shadow: 0 0 6px #10b981; }
+        .status-expired {
+            background: rgba(245, 158, 11, 0.12);
+            color: #fcd34d;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        .status-expired .status-dot { background: #f59e0b; }
+        .status-revoked {
+            background: rgba(239, 68, 68, 0.12);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .status-revoked .status-dot { background: #ef4444; }
+
+        .creator-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            color: #d8b4fe;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .creator-tag.tag-owner {
+            background: rgba(245, 158, 11, 0.12);
+            border-color: rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+        }
+
+        .device-badge {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+        }
+        .device-badge.bound {
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .actions-cell {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Cost calculation box in Create Modal */
+        .credit-cost-banner {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 95, 70, 0.15));
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: #e2e8f0;
+            transition: all 0.2s ease;
+        }
+        .credit-cost-banner.insufficient {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(153, 27, 27, 0.2));
+            border-color: rgba(239, 68, 68, 0.5);
+            color: #fca5a5;
+        }
+
+        /* Modals */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: none;
+            place-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .modal-backdrop.open { display: grid; }
+        .modal-box {
+            background: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            width: min(100%, 540px);
+            padding: 28px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            animation: modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .create-user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    align-items: end;
+}
+@media (max-width: 768px) {
+    .create-user-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+}
+@media (max-width: 480px) {
+    .create-user-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+.modal-box-lg {
+            width: min(100%, 820px);
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.96) translateY(-10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .modal-title {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+        }
+        .close-btn:hover { color: #fff; }
+
+        /* Form elements */
+        .form-group { margin-bottom: 16px; }
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+        .form-input, .form-select {
+            width: 100%;
+            background: #09090e;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-select:focus {
+            border-color: var(--accent);
+        }
+
+        .presets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .preset-btn {
+            background: #09090e;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-sm);
+            padding: 10px;
+            color: var(--text-main);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+        }
+        .preset-btn:hover {
+            border-color: var(--border-highlight);
+        }
+        .preset-btn.selected {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .keys-output {
+            background: #050508;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.6;
+            max-height: 220px;
+            overflow-y: auto;
+            white-space: pre;
+            color: #38bdf8;
+            margin: 16px 0;
+            user-select: all;
+        }
+
+        /* Login Card */
+        .login-wrap {
+            min-height: 85vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: radial-gradient(circle at 50% 35%, rgba(168, 85, 247, 0.15) 0%, transparent 65%);
+        }
+        .login-card {
+            background: rgba(14, 11, 20, 0.94);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            border-radius: 22px;
+            width: min(100%, 420px);
+            padding: 40px 34px 34px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(168, 85, 247, 0.25);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+        .login-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #a855f7 50%, transparent);
+            box-shadow: 0 0 12px #a855f7;
+        }
+        .login-logo-box {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 18px;
+            border-radius: 20px;
+            background: radial-gradient(circle, #241434, #09060e);
+            border: 1.5px solid rgba(255, 36, 66, 0.5);
+            box-shadow: 0 0 30px rgba(255, 36, 66, 0.4), inset 0 0 15px rgba(255, 36, 66, 0.2);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+        .login-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .login-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            background: linear-gradient(180deg, #ffffff 15%, #ffd1d8 60%, #ff2442 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 14px rgba(255, 36, 66, 0.5));
+            margin-bottom: 4px;
+        }
+        .login-subtitle {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            color: #8c7682;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #181824;
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 12px 20px;
+            font-size: 13px;
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2000;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px !important;
+            color: var(--text-muted);
+        }
+        .empty-state h3 {
+            font-size: 16px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { 
+                padding: 10px 14px; 
+                flex-direction: column; 
+                align-items: stretch; 
+                gap: 8px; 
+            }
+            .nav-brand {
+                justify-content: space-between;
+                width: 100%;
+            }
+            .nav-actions {
+                width: 100%;
+                justify-content: flex-start;
+                gap: 6px;
+                overflow-x: auto;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-actions::-webkit-scrollbar {
+                height: 3px;
+            }
+            .container { width: calc(100% - 24px); margin-top: 18px; }
+            .toolbar { flex-direction: column; align-items: stretch; }
+            .search-box { max-width: 100%; }
+            .filter-group { overflow-x: auto; }
+            .stat-val { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Default Password Warning -->
+    <div id="default-password-banner" class="banner-warning" style="display: none;">
+        <span><strong>SECURITY NOTICE:</strong> You are using default credentials (<code>admin</code> / <code>zerox2026</code>).</span>
+        <button class="btn btn-secondary btn-sm" onclick="openModal('password-modal')">Change Password Now</button>
+    </div>
+
+    <!-- Reseller Portal Banner -->
+    <div id="reseller-banner" class="banner-reseller" style="display: none;">
+        <span><strong>💼 RESELLER PORTAL:</strong> Welcome to your dedicated panel. You are viewing your personal license keys only.</span>
+        <span style="font-family: var(--font-mono); font-size: 11px; opacity: 0.8;">Keys Isolation Active</span>
+    </div>
+
+    <!-- Login View -->
+    <div id="view-login" class="login-wrap" style="display: grid;">
+        <div class="login-card">
+            <div class="login-logo-box">
+                <img src="../assets/rezx-logo.webp" alt="RezX Modz Logo" class="login-logo" onerror="this.onerror=null; this.src='../assets/rezx-logo.webp'">
+            </div>
+            <h1 class="login-title">RezX Modz</h1>
+            <p class="login-subtitle">License Command Center</p>
+            <form id="login-form">
+                <div class="form-group" style="text-align: left;">
+                    <label class="form-label" for="login-user">Username</label>
+                    <input type="text" id="login-user" class="form-input" placeholder="Enter username" required autocomplete="username">
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label class="form-label" for="login-pass">Password</label>
+                    <input type="password" id="login-pass" class="form-input" placeholder="Enter password" required autocomplete="current-password">
+                </div>
+                <button type="submit" id="login-submit-btn" class="btn btn-primary" style="width: 100%; padding: 13px; background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%); border: none; font-weight: 800; letter-spacing: 0.14em; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);">ENTER DASHBOARD</button>
+            </form>
+            <p id="login-error" style="color: #ef4444; font-size: 12px; margin-top: 14px; display: none;"></p>
+
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.08); text-align: center;">
+                <a href="https://whatsapp.com/channel/0029VbDu0Td96H4VbSt1Ss3f" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 11px 16px; background: rgba(37, 211, 102, 0.15); border: 1px solid rgba(37, 211, 102, 0.4); border-radius: 8px; color: #25D366; font-size: 13px; font-weight: 700; text-decoration: none; transition: all 0.2s ease; letter-spacing: 0.03em;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    <span>Join Official WhatsApp Channel</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="view-dashboard" style="display: none;">
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="nav-brand">
+                <img src="../assets/rezx-logo.webp" alt="RezX Modz Logo" class="brand-logo-img" onerror="this.onerror=null; this.src='../assets/rezx-logo.webp'">
+                <span>RezX Modz</span>
+                <span class="brand-badge" id="driver-badge">CONSOLE</span>
+            </div>
+            <div class="nav-actions">
+                <div id="nav-user-pill" class="user-pill role-owner">
+                    <span>👑 OWNER: admin</span>
+                </div>
+
+                <!-- Live Credits Badge -->
+                <div id="nav-credit-pill" class="credit-pill" title="Current Credit Balance">
+                    ⚡ <span id="user-credit-val">∞</span> Credits
+                </div>
+
+                
+                <!-- Maintenance Mode Toggle -->
+                <button id="btn-maint-toggle" class="btn btn-sm" onclick="openMaintenanceModal()" style="display: inline-flex; align-items: center; gap: 7px; font-weight: 700; border-radius: 20px; padding: 6px 14px; background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(255, 255, 255, 0.15); color: #94a3b8; cursor: pointer; transition: all 0.2s ease;">
+                    <span id="maint-indicator-dot" style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981;"></span>
+                    <span id="maint-btn-text">MAINTENANCE: OFF</span>
+                </button>
+
+                <button class="btn btn-primary" onclick="openCreateModal()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    CREATE KEYS
+                </button>
+
+                <!-- Manage Users & Resellers (Owner & Admin only) -->
+                <button id="btn-manage-users" class="btn btn-purple btn-sm" onclick="openUsersModal()" style="display: none;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Users & Resellers
+                </button>
+
+                <button class="btn btn-secondary btn-sm" onclick="openModal('password-modal')">My Password</button>
+                <a href="../index.php" target="_blank" class="btn btn-secondary btn-sm">Client Portal ↗</a>
+                <button class="btn btn-secondary btn-sm" onclick="logoutAdmin()">Logout</button>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- Stats Grid -->
+                        <!-- Autonomous Sentinel Bot Control Center -->
+                        <!-- Autonomous Sentinel Bot Control Center with AI Chat Terminal -->
+            <div id="sentinel-bot-panel" style="display: none; margin-bottom: 24px; padding: 22px 24px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(14, 14, 20, 0.98)); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: var(--radius-lg); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45); position: relative;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                            <span style="font-size: 24px;">🤖</span>
+                            <span style="font-family: var(--font-sans); font-size: 18px; font-weight: 800; letter-spacing: 0.5px; color: #fff;">
+                                AUTONOMOUS PROXY SENTINEL AI
+                            </span>
+                            <span id="bot-badge" style="padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 800; font-family: var(--font-mono); letter-spacing: 0.5px; background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4);">
+                                ● ACTIVE &amp; AUTO-HEALING
+                            </span>
+                            <span style="padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; font-family: var(--font-mono); background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                                ROOT ACCESS GRANTED
+                            </span>
+                        </div>
+                        <div style="color: var(--text-muted); font-size: 13px; max-width: 700px; line-height: 1.5;">
+                            Autonomous AI Daemon &amp; Interactive Server Controller. You can chat directly with the bot below to troubleshoot issues, boost server speed, switch clusters, or repair N/A automatically.
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                        <button type="button" id="btn-bot-start" class="btn btn-sm" onclick="startSentinelBot()" style="background: #10b981; border: 1px solid #10b981; color: #fff; font-weight: 700; display: none;">
+                            ▶ Start Bot
+                        </button>
+                        <button type="button" id="btn-bot-stop" class="btn btn-secondary btn-sm" onclick="stopSentinelBot()" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.4); font-weight: 700;">
+                            ⏸ Stop Bot
+                        </button>
+                        <button type="button" id="btn-bot-fix" class="btn btn-secondary btn-sm" onclick="triggerSentinelFix()" style="background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.4); color: #c084fc; font-weight: 700;">
+                            ⚡ Force Health Check &amp; Fix
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Telemetry Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                    <div style="background: rgba(0, 0, 0, 0.35); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+                        <div style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted); text-transform: uppercase;">Active Proxy Node</div>
+                        <div id="bot-active-server" style="font-size: 13px; font-weight: 700; color: #38bdf8; margin-top: 4px; font-family: var(--font-mono);">wraith-bom2.ph4nt0m.lol</div>
+                    </div>
+                    <div style="background: rgba(0, 0, 0, 0.35); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+                        <div style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted); text-transform: uppercase;">Live Ping Latency</div>
+                        <div id="bot-live-ping" style="font-size: 14px; font-weight: 800; color: #10b981; margin-top: 4px; font-family: var(--font-mono);">-- ms</div>
+                    </div>
+                    <div style="background: rgba(0, 0, 0, 0.35); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+                        <div style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted); text-transform: uppercase;">Last Scan Time</div>
+                        <div id="bot-last-scan" style="font-size: 12px; font-weight: 600; color: var(--text-main); margin-top: 5px;">Just now</div>
+                    </div>
+                    <div style="background: rgba(0, 0, 0, 0.35); padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+                        <div style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted); text-transform: uppercase;">Diagnosis / Action</div>
+                        <div id="bot-diag-msg" style="font-size: 12px; font-weight: 600; color: #f4f4f7; margin-top: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">All clusters operational</div>
+                    </div>
+                </div>
+
+                <!-- Interactive AI Terminal Chat -->
+                <div style="margin-top: 20px; background: rgba(5, 5, 8, 0.95); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius-md); overflow: hidden;">
+                    <div style="padding: 12px 16px; background: rgba(255, 255, 255, 0.03); border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981;"></span>
+                            <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 0.5px;">SENTINEL AI CONVERSATION TERMINAL</span>
+                        </div>
+                        <button type="button" onclick="clearChatMessages()" style="background: none; border: none; color: var(--text-muted); font-size: 11px; cursor: pointer; text-decoration: underline;">Clear Chat</button>
+                    </div>
+
+                    <!-- Message Feed -->
+                    <div id="bot-chat-box" style="padding: 16px; max-height: 280px; min-height: 120px; overflow-y: auto; font-family: var(--font-sans); font-size: 13px; display: flex; flex-direction: column; gap: 12px;">
+                        <div style="align-self: flex-start; max-width: 85%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 16px; color: #f4f4f7; line-height: 1.5;">
+                            👋 <b>Hello Himanshu!</b> I am your <b>Autonomous Sentinel AI</b> with full access to this server.<br>
+                            You can type instructions below like: <i>"speed up server"</i>, <i>"fix N/A"</i>, <i>"switch to bom2"</i>, or <i>"status"</i>. I will execute them immediately on the VPS.
+                        </div>
+                    </div>
+
+                    <!-- Quick Command Chips -->
+                    <div style="padding: 8px 16px; background: rgba(0, 0, 0, 0.2); border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; gap: 8px; overflow-x: auto; white-space: nowrap;">
+                        <span style="font-size: 11px; color: var(--text-muted); align-self: center; font-family: var(--font-mono); margin-right: 4px;">Quick Actions:</span>
+                        <button type="button" onclick="sendQuickPrompt('Speed up the server now')" class="btn-chip" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; padding: 4px 10px; border-radius: 14px; font-size: 11px; cursor: pointer; font-weight: 600;">⚡ Speed Up Server</button>
+                        <button type="button" onclick="sendQuickPrompt('Fix N/A and ping issues')" class="btn-chip" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); color: #f87171; padding: 4px 10px; border-radius: 14px; font-size: 11px; cursor: pointer; font-weight: 600;">🛠 Fix N/A &amp; Ping</button>
+                        <button type="button" onclick="sendQuickPrompt('Check complete health status and clusters')" class="btn-chip" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; padding: 4px 10px; border-radius: 14px; font-size: 11px; cursor: pointer; font-weight: 600;">📊 Full Health Report</button>
+                        <button type="button" onclick="sendQuickPrompt('Switch cluster to wraith-bom2')" class="btn-chip" style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.35); color: #c084fc; padding: 4px 10px; border-radius: 14px; font-size: 11px; cursor: pointer; font-weight: 600;">🔄 Switch Cluster</button>
+                    </div>
+
+                    <!-- Input Bar -->
+                    <div style="padding: 12px 16px; background: rgba(0, 0, 0, 0.4); border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; gap: 10px;">
+                        <input type="text" id="bot-chat-input" placeholder="Chat with Sentinel AI (e.g. 'speed up server', 'fix N/A', 'status')..." style="flex: 1; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; color: #fff; font-size: 13px; outline: none;" onkeydown="if(event.key==='Enter') sendChatMessage()">
+                        <button type="button" id="btn-chat-send" onclick="sendChatMessage()" style="background: #10b981; border: none; color: #fff; font-weight: 700; padding: 0 18px; border-radius: 8px; cursor: pointer; font-size: 13px;">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <section class="stats-grid">
+                <div class="stat-card" style="--card-accent: #ffffff;">
+                    <div class="stat-label">Total Licenses</div>
+                    <div class="stat-val" id="stat-total">0</div>
+                </div>
+                <div class="stat-card" style="--card-accent: #10b981;">
+                    <div class="stat-label">Active Licenses</div>
+                    <div class="stat-val" id="stat-active" style="color: #34d399;">0</div>
+                </div>
+                <div class="stat-card" style="--card-accent: #38bdf8;">
+                    <div class="stat-label">Unused Keys</div>
+                    <div class="stat-val" id="stat-unused" style="color: #7dd3fc;">0</div>
+                </div>
+                <div class="stat-card" style="--card-accent: #f59e0b;">
+                    <div class="stat-label">Expired</div>
+                    <div class="stat-val" id="stat-expired" style="color: #fcd34d;">0</div>
+                </div>
+                <div class="stat-card" style="--card-accent: #a855f7;">
+                    <div class="stat-label">Online Today</div>
+                    <div class="stat-val" id="stat-today" style="color: #c084fc;">0</div>
+                </div>
+            </section>
+
+            <!-- Filter & Search Toolbar -->
+            <div class="toolbar">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+                    <button class="filter-btn" data-filter="unused" onclick="setFilter('unused')">Unused</button>
+                    <button class="filter-btn" data-filter="active" onclick="setFilter('active')">Active</button>
+                    <button class="filter-btn" data-filter="expired" onclick="setFilter('expired')">Expired</button>
+                    <button class="filter-btn" data-filter="revoked" onclick="setFilter('revoked')">Revoked</button>
+                </div>
+
+                <div style="display: flex; gap: 10px; flex: 1; justify-content: flex-end; align-items: center; flex-wrap: wrap;">
+                    <!-- Creator Filter Dropdown (Owner/Admin only) -->
+                    <select id="creator-filter-select" class="creator-select" onchange="setCreatorFilter(this.value)" style="display: none;">
+                        <option value="">All Creators (All Keys)</option>
+                    </select>
+
+                    <div class="search-box">
+                        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" id="search-input" class="search-input" placeholder="Search by key or note…" oninput="handleSearch()">
+                    </div>
+                    <button class="btn btn-secondary btn-sm" onclick="exportVisibleKeys()">Copy Visible Keys</button>
+                </div>
+            </div>
+
+            <!-- Licenses Table -->
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table id="keys-table">
+                        <thead>
+                            <tr>
+                                <th>Access Key</th>
+                                <th>Status</th>
+                                <th>Duration / Expiry</th>
+                                <th>Device Binding</th>
+                                <th id="th-creator">Created By</th>
+                                <th>Note / Client</th>
+                                <th>Created</th>
+                                <th style="text-align: right;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="keys-tbody">
+                            <tr><td colspan="8" class="empty-state">Loading licenses…</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create License Modal with Live Credit Calculation -->
+    <div id="create-modal" class="modal-backdrop">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2 class="modal-title">Create License Keys</h2>
+                <button class="close-btn" onclick="closeModal('create-modal')">&times;</button>
+            </div>
+
+            <!-- Live Credit Cost Banner -->
+            <div id="credit-cost-box" class="credit-cost-banner">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>Cost per Key: <strong id="cost-per-key">10</strong> Credits</span>
+                    <span>Total Required: <strong id="cost-total" style="font-size: 14px;">10</strong> Credits</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 11px; opacity: 0.9;">
+                    <span>Available Balance: <strong id="cost-balance">∞</strong> Credits</span>
+                    <span id="cost-status-msg">Balance after mint: <strong id="cost-remaining">∞</strong> Credits</span>
+                </div>
+            </div>
+
+            <form id="create-license-form">
+                <div class="form-group">
+                    <label class="form-label">Key Duration Preset</label>
+                    <div class="presets-grid">
+                        <button type="button" class="preset-btn owner-only-preset" data-type="hours" data-val="1" onclick="selectPreset('hours', 1, this)" style="display: none; border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.08); color: #d8b4fe;">⚡ 1 Hour (Owner)</button>
+                        <button type="button" class="preset-btn" data-type="hours" data-val="24" onclick="selectPreset('hours', 24, this)">1 Day (1 Cr)</button>
+                        <button type="button" class="preset-btn" data-type="days" data-val="7" onclick="selectPreset('days', 7, this)">7 Days (3 Cr)</button>
+                        <button type="button" class="preset-btn selected" data-type="days" data-val="30" onclick="selectPreset('days', 30, this)">30 Days (10 Cr)</button>
+                        <button type="button" class="preset-btn" data-type="days" data-val="90" onclick="selectPreset('days', 90, this)">90 Days (25 Cr)</button>
+                        <button type="button" class="preset-btn" data-type="days" data-val="365" onclick="selectPreset('days', 365, this)">365 Days (80 Cr)</button>
+                        <button type="button" class="preset-btn" data-type="lifetime" data-val="0" onclick="selectPreset('lifetime', 0, this)">Lifetime (150 Cr)</button>
+                    </div>
+                </div>
+
+                <div id="create-count-devices-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div class="form-group">
+                        <label class="form-label" for="create-count">Quantity</label>
+                        <input type="number" id="create-count" class="form-input" min="1" max="100" value="1" required oninput="updateCostCalculation()">
+                    </div>
+                    <div class="form-group" id="create-devices-group">
+                        <label class="form-label" for="create-devices">Max Devices / Logins</label>
+                        <input type="number" id="create-devices" class="form-input" min="1" max="10" value="1" required>
+                    </div>
+                    <div class="form-group" id="reseller-devices-locked" style="display: none;">
+                        <label class="form-label">Max Logins</label>
+                        <input type="text" class="form-input" value="1 (Single Device Locked)" disabled style="opacity: 0.65; cursor: not-allowed; background: rgba(255,255,255,0.05); color: #a1a1aa; border-color: rgba(255,255,255,0.1);">
+                    </div>
+                </div>
+
+                <!-- Owner Exclusive: Unlimited Devices -->
+                <div id="owner-unlimited-box" style="margin-bottom: 14px; padding: 10px 12px; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.35); border-radius: 8px; display: none;">
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #d8b4fe; cursor: pointer; user-select: none;">
+                        <input type="checkbox" id="create-unlimited-devices" onchange="toggleUnlimitedDevices(this.checked)" style="accent-color: #a855f7; width: 16px; height: 16px; cursor: pointer;">
+                        <span>♾️ UNLIMITED USERS / DEVICES (Owner Exclusive)</span>
+                    </label>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.6); display: block; margin-left: 24px; margin-top: 2px;">Bypass device count limits. Unlimited simultaneous users can log in with this key.</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div class="form-group">
+                        <label class="form-label" for="create-prefix">Key Prefix</label>
+                        <input type="text" id="create-prefix" class="form-input" value="ZEROX" placeholder="e.g. ZEROX">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="create-custom">Custom Key (Single)</label>
+                        <input type="text" id="create-custom" class="form-input" placeholder="Leave empty for auto">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="create-note">Customer Note / Order ID (Optional)</label>
+                    <input type="text" id="create-note" class="form-input" placeholder="e.g. RezX User @john">
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="closeModal('create-modal')">Cancel</button>
+                    <button type="submit" id="create-submit-btn" class="btn btn-primary" style="flex: 1;">Generate & Deduct Credits</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Output Modal -->
+    <div id="output-modal" class="modal-backdrop">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2 class="modal-title">Keys Created Successfully</h2>
+                <button class="close-btn" onclick="closeModal('output-modal')">&times;</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 13px;">Copy the keys below to distribute to your clients:</p>
+            <div id="created-keys-output" class="keys-output"></div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn btn-primary" style="flex: 1;" onclick="copyCreatedKeys()">Copy All Keys</button>
+                <button class="btn btn-secondary" style="flex: 1;" onclick="closeModal('output-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users & Resellers Management Modal -->
+    <div id="users-modal" class="modal-backdrop">
+        <div class="modal-box modal-box-lg">
+            <div class="modal-header">
+                <h2 class="modal-title">👥 Team & Resellers Management</h2>
+                <button class="close-btn" onclick="closeModal('users-modal')">&times;</button>
+            </div>
+
+            <!-- Create Account Box -->
+            <div style="background: #09090e; border: 1px solid var(--surface-border); border-radius: var(--radius-md); padding: 18px; margin-bottom: 24px;">
+                <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 12px; color: #fff;">+ Add New Account</h3>
+                <form id="create-user-form" class="create-user-grid">
+                    <div>
+                        <label class="form-label" for="new-user-name">Username</label>
+                        <input type="text" id="new-user-name" class="form-input" placeholder="e.g. reseller_mike" required minlength="2" maxlength="32">
+                    </div>
+                    <div>
+                        <label class="form-label" for="new-user-pass">Password</label>
+                        <input type="password" id="new-user-pass" class="form-input" placeholder="Min 4 characters" required minlength="4">
+                    </div>
+                    <div>
+                        <label class="form-label" for="new-user-role">Role</label>
+                        <select id="new-user-role" class="form-select">
+                            <option value="reseller" selected>Reseller (Isolated)</option>
+                            <option value="admin" id="opt-role-admin">Admin (All Keys)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label" for="new-user-credits">Initial Credits</label>
+                        <input type="number" id="new-user-credits" class="form-input" min="0" max="100000" value="100" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="new-user-validity">Validity (KeyAuth)</label>
+                        <select id="new-user-validity" class="form-select">
+                            <option value="30" selected>30 Days (Standard)</option>
+                            <option value="7">7 Days (Trial)</option>
+                            <option value="60">60 Days</option>
+                            <option value="90">90 Days</option>
+                            <option value="365">365 Days (1 Year)</option>
+                            <option value="0">Lifetime (No Expiry)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" id="create-user-btn" class="btn btn-primary" style="padding: 10px 18px;">Create</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Existing Accounts Table -->
+            <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Existing Accounts</h3>
+            <div class="table-responsive" style="max-height: 280px; overflow-y: auto;">
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Validity (KeyAuth)</th>
+                            <th>Device Lock (HWID)</th>
+                            <th>Credit Balance</th>
+                            <th>Created By</th>
+                            <th>Keys Made</th>
+                            <th>Created Date</th>
+                            <th style="text-align: right;">Manage</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-tbody">
+                        <tr><td colspan="9" class="empty-state">Loading team accounts…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Credit Management Sub-Modal -->
+    <div id="credit-modal" class="modal-backdrop">
+        <div class="modal-box" style="width: min(100%, 440px);">
+            <div class="modal-header">
+                <h2 class="modal-title" id="credit-modal-title">⚡ Manage User Credits</h2>
+                <button class="close-btn" onclick="closeModal('credit-modal')">&times;</button>
+            </div>
+            <div style="background: #09090e; border: 1px solid var(--surface-border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 18px; font-family: var(--font-mono); font-size: 13px;">
+                User: <strong id="credit-target-user" style="color:#fff;">—</strong> | Current Balance: <strong id="credit-target-curr" style="color:#34d399;">0</strong> Credits
+            </div>
+
+            <form id="credit-adjust-form">
+                <input type="hidden" id="credit-target-hidden">
+                <div class="form-group">
+                    <label class="form-label">Quick Add Presets</label>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="setCreditPreset(20)">+20</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="setCreditPreset(50)">+50</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="setCreditPreset(100)">+100</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="setCreditPreset(500)">+500</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="credit-mode">Operation Mode</label>
+                    <select id="credit-mode" class="form-select">
+                        <option value="add" selected>Add Credits to Balance (+)</option>
+                        <option value="set">Set Exact Balance (=)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="credit-amount">Credit Amount</label>
+                    <input type="number" id="credit-amount" class="form-input" min="1" max="100000" value="50" required>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="closeModal('credit-modal')">Cancel</button>
+                    <button type="submit" id="credit-submit-btn" class="btn btn-primary" style="flex: 1;">Update Credits</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reseller Validity Management Modal (Owner Only) -->
+    <div id="validity-modal" class="modal-backdrop">
+        <div class="modal-box" style="width: min(100%, 460px);">
+            <div class="modal-header">
+                <h2 class="modal-title" id="validity-modal-title">📅 Manage Reseller Validity</h2>
+                <button class="close-btn" onclick="closeModal('validity-modal')">&times;</button>
+            </div>
+
+            <div style="background: #09090e; border: 1px solid var(--surface-border); border-radius: 8px; padding: 14px; margin-bottom: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 13px; color: var(--text-muted);">Target Reseller:</span>
+                    <strong id="validity-target-name" style="font-size: 14px; color: #fff;">reseller_mike</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; color: var(--text-muted);">Current Expiration:</span>
+                    <span id="validity-current-status" style="font-family: var(--font-mono); font-weight: 700;">Loading…</span>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <label class="form-label">Quick Extend Access</label>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="submitValidityAction('extend_days', 7)">+7 Days</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="submitValidityAction('extend_days', 30)" style="border-color: #38bdf8; color: #38bdf8; font-weight: 700;">+30 Days</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="submitValidityAction('extend_days', 60)">+60 Days</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="submitValidityAction('extend_days', 90)">+90 Days</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="submitValidityAction('extend_days', 365)">+1 Year</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="submitValidityAction('lifetime', 0)" style="border-color: #a855f7; color: #d8b4fe; font-weight: 700;">♾️ Lifetime</button>
+                </div>
+            </div>
+
+            <form id="validity-custom-form" onsubmit="handleCustomValidity(event)">
+                <div class="form-group">
+                    <label class="form-label" for="validity-custom-days">Or Set Exact Days From Today</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="number" id="validity-custom-days" class="form-input" min="1" max="3650" value="30" placeholder="e.g. 45">
+                        <button type="submit" class="btn btn-primary" style="white-space: nowrap; padding: 0 16px;">Set Days</button>
+                    </div>
+                </div>
+            </form>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--surface-border);">
+                <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure you want to expire this reseller immediately? Their login and KeyAuth access will be locked.')) submitValidityAction('expire', 0)">🔒 Expire Account Now</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('validity-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div id="password-modal" class="modal-backdrop">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2 class="modal-title">Change Password</h2>
+                <button class="close-btn" onclick="closeModal('password-modal')">&times;</button>
+            </div>
+            <form id="password-form">
+                <div class="form-group">
+                    <label class="form-label" for="current-password">Current Password</label>
+                    <input type="password" id="current-password" class="form-input" required autocomplete="current-password">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="new-password">New Password</label>
+                    <input type="password" id="new-password" class="form-input" minlength="4" placeholder="Min 4 characters" required autocomplete="new-password">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="closeModal('password-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <span id="toast-text">Message</span>
+    </div>
+
+    <script>
+        const state = {
+            authenticated: false,
+            username: null,
+            role: 'owner',
+            credits: -1,
+            filter: 'all',
+            creatorFilter: '',
+            search: '',
+            keys: [],
+            stats: {},
+            creators: [],
+            createPreset: { type: 'days', val: 30 }
+        };
+
+        const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+        function showToast(text, duration = 3000) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').textContent = text;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), duration);
+        }
+
+        function openModal(id) { document.getElementById(id).classList.add('open'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+        function getAdminHWID() {
+            let hwid = localStorage.getItem('zerox_admin_hwid');
+            if (!hwid || hwid.length < 16) {
+                const arr = new Uint8Array(20);
+                window.crypto.getRandomValues(arr);
+                hwid = 'HWID-' + Array.from(arr, b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+                localStorage.setItem('zerox_admin_hwid', hwid);
+            }
+            return hwid;
+        }
+
+        function toggleUnlimitedDevices(isUnlimited) {
+            const devInput = document.getElementById('create-devices');
+            if (isUnlimited) {
+                devInput.value = '0';
+                devInput.disabled = true;
+                devInput.style.opacity = '0.5';
+            } else {
+                devInput.value = '1';
+                devInput.disabled = false;
+                devInput.style.opacity = '1';
+            }
+        }
+
+        function openCreateModal() {
+            document.getElementById('create-license-form').reset();
+            document.getElementById('create-count').value = '1';
+            const isReseller = (state.role === 'reseller');
+            const devGroup = document.getElementById('create-devices-group');
+            const resLock = document.getElementById('reseller-devices-locked');
+            const unl = document.getElementById('create-unlimited-devices');
+            const unlBox = document.getElementById('owner-unlimited-box');
+
+            if (isReseller) {
+                if (devGroup) devGroup.style.display = 'none';
+                if (resLock) resLock.style.display = 'block';
+                if (unlBox) unlBox.style.display = 'none';
+                document.getElementById('create-devices').value = '1';
+                document.getElementById('create-devices').disabled = true;
+            } else {
+                if (devGroup) devGroup.style.display = 'block';
+                if (resLock) resLock.style.display = 'none';
+                if (unlBox) unlBox.style.display = (state.role === 'owner') ? 'block' : 'none';
+                document.getElementById('create-devices').value = '1';
+                document.getElementById('create-devices').disabled = false;
+                document.getElementById('create-devices').style.opacity = '1';
+            }
+            if (unl) unl.checked = false;
+            document.getElementById('create-prefix').value = 'ZEROX';
+
+            // Enforce reseller 30-day max key duration limit & owner-exclusive 1h key in UI
+            document.querySelectorAll('.preset-btn').forEach(b => {
+                const isOver30 = (b.dataset.type === 'lifetime' || (b.dataset.type === 'days' && parseInt(b.dataset.val, 10) > 30));
+                const isOwnerOnly = b.classList.contains('owner-only-preset') || (b.dataset.type === 'hours' && parseInt(b.dataset.val, 10) < 24);
+                if (state.role === 'reseller' && isOver30) {
+                    b.style.display = 'none';
+                } else if (state.role !== 'owner' && isOwnerOnly) {
+                    b.style.display = 'none';
+                } else {
+                    b.style.display = 'inline-block';
+                }
+            });
+
+            const default30Btn = document.querySelector('.preset-btn[data-val="30"][data-type="days"]');
+            selectPreset('days', 30, default30Btn);
+            updateCostCalculation();
+            openModal('create-modal');
+        }
+
+        function selectPreset(type, val, btnEl) {
+            if (state.role !== 'owner' && type === 'hours' && val < 24) {
+                showToast('1 Hour key is an Owner exclusive feature');
+                type = 'days';
+                val = 30;
+                btnEl = document.querySelector('.preset-btn[data-val="30"][data-type="days"]');
+            }
+            if (state.role === 'reseller') {
+                if (type === 'lifetime' || (type === 'days' && val > 30) || (type === 'months' && val > 1) || (type === 'hours' && val > 720)) {
+                    showToast('Resellers cannot create keys greater than 30 days');
+                    type = 'days';
+                    val = 30;
+                    btnEl = document.querySelector('.preset-btn[data-val="30"][data-type="days"]');
+                }
+            }
+            state.createPreset = { type, val };
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('selected'));
+            if (btnEl) btnEl.classList.add('selected');
+            updateCostCalculation();
+        }
+
+        function getCreditCost(type, val) {
+            if (type === 'lifetime') return 150;
+            if (type === 'hours') return Math.max(1, Math.ceil(val / 24));
+            if (type === 'months') return Math.max(1, val * 10);
+            if (val <= 1) return 1;
+            if (val <= 7) return 3;
+            if (val <= 30) return 10;
+            if (val <= 90) return 25;
+            if (val <= 365) return 80;
+            return Math.max(1, Math.ceil(val / 3));
+        }
+
+        function updateCostCalculation() {
+            const count = Math.max(1, parseInt(document.getElementById('create-count').value, 10) || 1);
+            const costPerKey = getCreditCost(state.createPreset.type, state.createPreset.val);
+            const totalCost = costPerKey * count;
+
+            document.getElementById('cost-per-key').textContent = costPerKey;
+            document.getElementById('cost-total').textContent = totalCost;
+
+            const box = document.getElementById('credit-cost-box');
+            const submitBtn = document.getElementById('create-submit-btn');
+
+            if (state.credits === -1 || state.role === 'owner' || state.role === 'admin') {
+                document.getElementById('cost-balance').textContent = '∞';
+                document.getElementById('cost-remaining').textContent = '∞';
+                box.className = 'credit-cost-banner';
+                submitBtn.disabled = false;
+                submitBtn.textContent = `Generate ${count} Key(s) (Owner Unlimited)`;
+            } else {
+                document.getElementById('cost-balance').textContent = state.credits;
+                const remaining = state.credits - totalCost;
+                if (remaining >= 0) {
+                    document.getElementById('cost-remaining').textContent = remaining;
+                    box.className = 'credit-cost-banner';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = `Generate ${count} Key(s) (${totalCost} Credits)`;
+                } else {
+                    document.getElementById('cost-remaining').textContent = 'Short by ' + Math.abs(remaining);
+                    box.className = 'credit-cost-banner insufficient';
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = `⚠️ Insufficient Credits (Need ${totalCost}, Have ${state.credits})`;
+                }
+            }
+        }
+
+        // Check authentication & permissions
+        async function checkStatus() {
+            try {
+                const res = await fetch('api.php?action=status');
+                const data = await res.json();
+                if (data.authenticated) {
+                    state.authenticated = true;
+                    state.username = data.username;
+                    state.role = (data.role || 'owner').toLowerCase();
+                    state.credits = (data.credits !== undefined) ? data.credits : ((state.role === 'owner' || state.role === 'admin') ? -1 : 0);
+
+                    document.getElementById('view-login').style.display = 'none';
+                    document.getElementById('view-dashboard').style.display = 'block';
+
+                    updateUserPillUI();
+                    updateCreditsUI();
+
+                    if (data.is_default_password) {
+                        document.getElementById('default-password-banner').style.display = 'flex';
+                    } else {
+                        document.getElementById('default-password-banner').style.display = 'none';
+                    }
+
+                    if (state.role === 'reseller') {
+                        document.getElementById('reseller-banner').style.display = 'flex';
+                        document.getElementById('btn-manage-users').style.display = 'none';
+                        document.getElementById('creator-filter-select').style.display = 'none';
+
+                        // Reseller: Strictly hide Sentinel Bot panel & block access
+                        const sentinelPanel = document.getElementById('sentinel-bot-panel');
+                        if (sentinelPanel) sentinelPanel.style.display = 'none';
+
+                        // Show remaining KeyAuth validity in the banner
+                        const expAt = parseInt(data.expires_at, 10) || 0;
+                        const nowTs = Math.floor(Date.now() / 1000);
+                        let valText = 'Lifetime Access';
+                        if (expAt > 0) {
+                            if (expAt > nowTs) {
+                                const dLeft = Math.ceil((expAt - nowTs) / 86400);
+                                const dStr = new Date(expAt * 1000).toISOString().slice(0, 10);
+                                valText = `Access Valid Until: ${dStr} (${dLeft} days left)`;
+                            } else {
+                                valText = `Access Expired`;
+                            }
+                        }
+                        const bannerEl = document.getElementById('reseller-banner');
+                        bannerEl.innerHTML = `
+                            <span><strong>💼 RESELLER PORTAL:</strong> Dedicated KeyAuth Panel. You are viewing your personal license keys only (Max 30 Days).</span>
+                            <span style="font-family: var(--font-mono); font-size: 11px; padding: 3px 8px; background: rgba(0,0,0,0.3); border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); color: #38bdf8;">⏳ ${valText}</span>
+                        `;
+                    } else {
+                        document.getElementById('reseller-banner').style.display = 'none';
+                        document.getElementById('btn-manage-users').style.display = 'inline-flex';
+                        document.getElementById('creator-filter-select').style.display = 'inline-block';
+                        if (state.role === 'admin') {
+                            const optAdmin = document.getElementById('opt-role-admin');
+                            if (optAdmin) optAdmin.style.display = 'none';
+                        }
+
+                        // Owner & Admin: Reveal Sentinel Bot panel and load status
+                        const sentinelPanel = document.getElementById('sentinel-bot-panel');
+                        if (sentinelPanel) sentinelPanel.style.display = 'block';
+                        fetchBotStatus();
+                    }
+
+                    const unlBox = document.getElementById('owner-unlimited-box');
+                    if (unlBox) {
+                        unlBox.style.display = (state.role === 'owner') ? 'block' : 'none';
+                    }
+
+                    loadKeys();
+                } else {
+                    document.getElementById('view-dashboard').style.display = 'none';
+                    document.getElementById('view-login').style.display = 'grid';
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('view-login').style.display = 'grid';
+            }
+        }
+
+        function updateUserPillUI() {
+            const pill = document.getElementById('nav-user-pill');
+            pill.className = `user-pill role-${state.role}`;
+            let icon = '💼';
+            let title = 'RESELLER';
+            if (state.role === 'owner') { icon = '👑'; title = 'OWNER'; }
+            else if (state.role === 'admin') { icon = '🛡️'; title = 'ADMIN'; }
+            pill.innerHTML = `<span>${icon} ${title}: ${esc(state.username)}</span>`;
+        }
+
+        function updateCreditsUI() {
+            const pill = document.getElementById('nav-credit-pill');
+            const val = document.getElementById('user-credit-val');
+            if (state.credits === -1 || state.role === 'owner' || state.role === 'admin') {
+                val.textContent = '∞';
+                pill.className = 'credit-pill';
+            } else {
+                val.textContent = state.credits;
+                if (state.credits <= 0) {
+                    pill.className = 'credit-pill credit-danger';
+                } else if (state.credits <= 20) {
+                    pill.className = 'credit-pill credit-warning';
+                } else {
+                    pill.className = 'credit-pill';
+                }
+            }
+        }
+
+        // Login Handler
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('login-submit-btn');
+            const err = document.getElementById('login-error');
+            err.style.display = 'none';
+            btn.disabled = true;
+            btn.textContent = 'AUTHENTICATING…';
+
+            try {
+                const res = await fetch('api.php?action=login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: document.getElementById('login-user').value.trim(),
+                        password: document.getElementById('login-pass').value,
+                        hwid: getAdminHWID()
+                    })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    showToast('Logged in successfully');
+                    await checkStatus();
+                    loadKeys();
+                } else {
+                    err.textContent = data.message || 'Login failed';
+                    err.style.display = 'block';
+                }
+            } catch (error) {
+                err.textContent = 'Server connection error';
+                err.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'ENTER DASHBOARD';
+            }
+        });
+
+        async function logoutAdmin() {
+            await fetch('api.php?action=logout');
+            location.reload();
+        }
+
+        // Fetch & Render Keys
+        async function loadKeys() {
+            try {
+                let url = `api.php?action=keys&filter=${encodeURIComponent(state.filter)}&search=${encodeURIComponent(state.search)}`;
+                if (state.creatorFilter) {
+                    url += `&creator=${encodeURIComponent(state.creatorFilter)}`;
+                }
+                const res = await fetch(url);
+                const data = await res.json();
+                if (data.status === 'success') {
+                    state.keys = data.keys || [];
+                    state.stats = data.stats || {};
+                    state.creators = data.creators || [];
+                    if (data.credits !== undefined) {
+                        state.credits = data.credits;
+                        updateCreditsUI();
+                    }
+                    renderStats();
+                    renderCreatorOptions();
+                    renderKeysTable();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function renderCreatorOptions() {
+            const sel = document.getElementById('creator-filter-select');
+            if (state.role === 'reseller') {
+                sel.style.display = 'none';
+                return;
+            }
+            sel.style.display = 'inline-block';
+            const currentVal = state.creatorFilter;
+            let html = '<option value="">All Creators (All Keys)</option>';
+            state.creators.forEach(c => {
+                const selected = (c === currentVal) ? 'selected' : '';
+                html += `<option value="${esc(c)}" ${selected}>Creator: ${esc(c)}</option>`;
+            });
+            sel.innerHTML = html;
+        }
+
+        function setCreatorFilter(val) {
+            state.creatorFilter = val;
+            loadKeys();
+        }
+
+        function renderStats() {
+            const s = state.stats;
+            document.getElementById('stat-total').textContent = s.total ?? 0;
+            document.getElementById('stat-active').textContent = s.active ?? 0;
+            document.getElementById('stat-unused').textContent = s.unused ?? 0;
+            document.getElementById('stat-expired').textContent = s.expired ?? 0;
+            document.getElementById('stat-today').textContent = s.today_active ?? 0;
+
+            if (s.driver) {
+                const driverEl = document.getElementById('driver-badge');
+                if (driverEl) {
+                    driverEl.textContent = s.driver === 'mysql' ? '● MYSQL ACTIVE' : (s.driver.toUpperCase() + ' STORAGE');
+                    if (s.driver === 'mysql') {
+                        driverEl.style.color = '#34d399';
+                        driverEl.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                        driverEl.style.background = 'rgba(16, 185, 129, 0.1)';
+                    }
+                }
+            }
+        }
+
+        function renderKeysTable() {
+            const tbody = document.getElementById('keys-tbody');
+            if (state.keys.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="empty-state">
+                    <h3>No Licenses Found</h3>
+                    <p>Click "Create Keys" above to mint your first license.</p>
+                </td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = state.keys.map(k => {
+                const keyStr = k.license_key || k.key || k.license || k.code || '';
+                const status = k.status || 'unused';
+                const statusClass = `status-${status}`;
+                const creator = k.created_by || 'admin';
+                const isOwnerCreator = (creator === 'admin');
+
+                let durationDesc = '';
+                if (k.duration_type === 'lifetime' || k.duration_value === 0) {
+                    durationDesc = 'Lifetime ∞';
+                } else if (k.expires_at) {
+                    const expDate = new Date(k.expires_at * 1000);
+                    const now = new Date();
+                    const diffMs = expDate - now;
+                    if (diffMs > 0) {
+                        const diffHrs = Math.floor(diffMs / (1000 * 60 * 60));
+                        const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+                        let leftText = diffMs > 86400000 
+                            ? `${Math.ceil(diffMs / 86400000)}d left`
+                            : (diffHrs > 0 ? `${diffHrs}h ${diffMins}m left` : `${diffMins}m left`);
+                        durationDesc = `<span style="color:#e2e8f0;">${expDate.toISOString().slice(0, 10)}</span> <small style="color:var(--text-muted);">(${leftText})</small>`;
+                    } else {
+                        durationDesc = `<span style="color:#f87171;">Expired</span> <small style="color:var(--text-muted);">${expDate.toISOString().slice(0, 10)}</small>`;
+                    }
+                } else {
+                    const unit = (k.duration_value === 1 && k.duration_type === 'hours') ? 'Hour' : k.duration_type;
+                    durationDesc = `<span style="color:#94a3b8;">${k.duration_value} ${unit}</span> <small style="color:#64748b;">(Upon activation)</small>`;
+                }
+
+                const devicesCount = Array.isArray(k.devices) ? k.devices.length : 0;
+                const maxDevices = (k.max_devices !== undefined && k.max_devices !== null) ? parseInt(k.max_devices, 10) : 1;
+                const isUnlimited = (maxDevices <= 0);
+                const deviceBadge = isUnlimited
+                    ? `<span class="device-badge bound" style="background:rgba(168,85,247,0.22); border-color:#a855f7; color:#d8b4fe; font-weight:700;">♾️ ${devicesCount} (Unlimited)</span>`
+                    : `<span class="device-badge ${devicesCount > 0 ? 'bound' : ''}">${devicesCount}/${maxDevices} bound</span>`;
+
+                const createdDate = k.created_at ? new Date(k.created_at * 1000).toISOString().slice(0, 10) : '—';
+                const isRevoked = (status === 'revoked');
+
+                return `
+                    <tr>
+                        <td>
+                            <div class="key-badge">
+                                <span>${esc(keyStr)}</span>
+                                <button class="copy-icon-btn" title="Copy Key" onclick="copyToClipboard('${esc(keyStr)}')">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-pill ${statusClass}">
+                                <i class="status-dot"></i>
+                                ${status}
+                            </span>
+                        </td>
+                        <td>${durationDesc}</td>
+                        <td>${deviceBadge}</td>
+                        <td>
+                            <span class="creator-tag ${isOwnerCreator ? 'tag-owner' : ''}">
+                                ${isOwnerCreator ? '👑' : '👤'} ${esc(creator)}
+                            </span>
+                        </td>
+                        <td style="color: #cbd5e1; font-weight: 500;">${esc(k.note || '—')}</td>
+                        <td style="color: var(--text-muted); font-size: 12px;">${createdDate}</td>
+                        <td style="text-align: right;">
+                            <div class="actions-cell" style="justify-content: flex-end;">
+                                <button class="btn btn-secondary btn-sm" title="Extend 30 Days (10 Cr)" onclick="extendKey('${esc(keyStr)}', 30)">+30d</button>
+                                <button class="btn btn-secondary btn-sm" title="Reset HWID" onclick="resetDevices('${esc(keyStr)}')">Reset HWID</button>
+                                <button class="btn ${isRevoked ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="toggleRevoke('${esc(keyStr)}', ${!isRevoked})">
+                                    ${isRevoked ? 'Unban' : 'Revoke'}
+                                </button>
+                                <button class="btn btn-danger btn-sm" title="Delete Key" onclick="deleteKey('${esc(keyStr)}')">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function setFilter(filter) {
+            state.filter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.filter === filter);
+            });
+            loadKeys();
+        }
+
+        let searchDebounce;
+        function handleSearch() {
+            clearTimeout(searchDebounce);
+            searchDebounce = setTimeout(() => {
+                state.search = document.getElementById('search-input').value.trim();
+                loadKeys();
+            }, 250);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+            showToast('Copied: ' + text);
+        }
+
+        function exportVisibleKeys() {
+            if (!state.keys.length) {
+                showToast('No keys to copy');
+                return;
+            }
+            const list = state.keys.map(k => k.license_key || k.key || k.code || '').join('\n');
+            navigator.clipboard.writeText(list);
+            showToast(`Copied ${state.keys.length} keys to clipboard`);
+        }
+
+        // Actions
+        async function resetDevices(key) {
+            if (!confirm(`Reset device HWID for ${key}? The user will be able to bind a fresh device.`)) return;
+            const res = await fetch('api.php?action=reset_devices', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ key })
+            });
+            const data = await res.json();
+            showToast(data.message);
+            loadKeys();
+        }
+
+        async function extendKey(key, days) {
+            if (!confirm(`Extend license ${key} by ${days} days? (Cost: 10 Credits)`)) return;
+            const res = await fetch('api.php?action=extend', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ key, days })
+            });
+            const data = await res.json();
+            if (data.status === 'success') {
+                showToast(data.message);
+                if (data.credits_remaining !== undefined) {
+                    state.credits = data.credits_remaining;
+                    updateCreditsUI();
+                }
+                loadKeys();
+            } else {
+                alert(data.message || 'Could not extend key');
+            }
+        }
+
+        async function toggleRevoke(key, revoke) {
+            const actionText = revoke ? 'revoke' : 'reinstate';
+            if (!confirm(`Are you sure you want to ${actionText} ${key}?`)) return;
+            const res = await fetch('api.php?action=revoke', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ key, revoke })
+            });
+            const data = await res.json();
+            showToast(data.message);
+            loadKeys();
+        }
+
+        async function deleteKey(key) {
+            if (!confirm(`Permanently delete license ${key}? This cannot be undone.`)) return;
+            const res = await fetch('api.php?action=delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ key })
+            });
+            const data = await res.json();
+            showToast(data.message);
+            loadKeys();
+        }
+
+        // Create License Form Handler (with credits deduction)
+        document.getElementById('create-license-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('create-submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'MINTING & DEDUCTING CREDITS…';
+
+            const isReseller = (state.role === 'reseller');
+            const isUnlimited = !isReseller && document.getElementById('create-unlimited-devices') && document.getElementById('create-unlimited-devices').checked;
+            const payload = {
+                count: parseInt(document.getElementById('create-count').value, 10) || 1,
+                duration_type: state.createPreset.type,
+                duration_value: state.createPreset.val,
+                max_devices: isReseller ? 1 : (isUnlimited ? 0 : (parseInt(document.getElementById('create-devices').value, 10) || 1)),
+                unlimited_devices: isUnlimited,
+                prefix: document.getElementById('create-prefix').value.trim() || 'ZEROX',
+                custom_key: document.getElementById('create-custom').value.trim() || null,
+                note: document.getElementById('create-note').value.trim()
+            };
+
+            try {
+                const res = await fetch('api.php?action=create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const text = await res.text();
+                let data;
+                try { data = JSON.parse(text); } catch (e) { throw Error(text.replace(/<[^>]+>/g, '').trim() || 'Invalid server response'); }
+                if (data.status === 'success') {
+                    closeModal('create-modal');
+                    const keyList = (data.keys || []).map(k => k.license_key || k.key || k.code).join('\n');
+                    document.getElementById('created-keys-output').textContent = keyList;
+                    openModal('output-modal');
+                    showToast(data.message);
+
+                    if (data.credits_remaining !== undefined) {
+                        state.credits = data.credits_remaining;
+                        updateCreditsUI();
+                    }
+
+                    setFilter('all'); // Show all keys so newly created key is instantly at top
+                } else {
+                    alert(data.message || 'Could not create key');
+                }
+            } catch (err) {
+                alert(err.message || 'Connection error');
+            } finally {
+                btn.disabled = false;
+                updateCostCalculation();
+            }
+        });
+
+        function copyCreatedKeys() {
+            const text = document.getElementById('created-keys-output').textContent;
+            navigator.clipboard.writeText(text);
+            showToast('Copied all keys to clipboard');
+        }
+
+        // Change Password Form
+        document.getElementById('password-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const current = document.getElementById('current-password').value;
+            const pass = document.getElementById('new-password').value;
+
+            try {
+                const res = await fetch('api.php?action=change_password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        current_password: current,
+                        new_password: pass
+                    })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    closeModal('password-modal');
+                    document.getElementById('default-password-banner').style.display = 'none';
+                    showToast('Password updated successfully');
+                    document.getElementById('password-form').reset();
+                } else {
+                    alert(data.message || 'Failed to update password');
+                }
+            } catch (err) {
+                alert('Connection error');
+            }
+        });
+
+        // -------------------------------------------------------------
+        // Team & Reseller Management (Owner & Admin only)
+        // -------------------------------------------------------------
+        async function openUsersModal() {
+            openModal('users-modal');
+            loadUsersList();
+        }
+
+        async function loadUsersList() {
+            const tbody = document.getElementById('users-tbody');
+            tbody.innerHTML = `<tr><td colspan="7" class="empty-state">Loading accounts…</td></tr>`;
+
+            try {
+                const res = await fetch('api.php?action=users');
+                const data = await res.json();
+                if (data.status === 'success') {
+                    const users = data.users || [];
+                    if (data.my_credits !== undefined) {
+                        state.credits = data.my_credits;
+                        updateCreditsUI();
+                    }
+
+                    if (users.length === 0) {
+                        tbody.innerHTML = `<tr><td colspan="7" class="empty-state">No accounts found.</td></tr>`;
+                        return;
+                    }
+
+                    tbody.innerHTML = users.map(u => {
+                        const isOwner = (u.role === 'owner');
+                        const isSelf = (strcasecmp(u.username, state.username) === 0);
+                        const canDelete = !isOwner && !isSelf && (state.role === 'owner' || u.role === 'reseller');
+                        const canManageCredits = (state.role === 'owner' || (state.role === 'admin' && u.role === 'reseller'));
+
+                        let roleBadge = `<span class="user-pill role-reseller" style="font-size:11px; padding:2px 8px;">💼 RESELLER</span>`;
+                        if (u.role === 'owner') roleBadge = `<span class="user-pill role-owner" style="font-size:11px; padding:2px 8px;">👑 OWNER</span>`;
+                        else if (u.role === 'admin') roleBadge = `<span class="user-pill role-admin" style="font-size:11px; padding:2px 8px;">🛡️ ADMIN</span>`;
+
+                        let hwidBadge = `<span style="color: var(--text-muted); font-size: 11px;">—</span>`;
+                        const isResellerUser = (u.role === 'reseller');
+                        const canResetHwid = isResellerUser && (state.role === 'owner' || state.role === 'admin');
+                        const canManageValidity = ((state.role === 'owner' || state.role === 'admin') && isResellerUser);
+                        const isPaused = !!u.is_paused;
+                        const canTogglePause = !isOwner && !isSelf && (state.role === 'owner' || state.role === 'admin');
+
+                        if (isResellerUser) {
+                            if (u.hwid && u.hwid.length > 0) {
+                                hwidBadge = `<span title="Locked to HWID: ${esc(u.hwid)}" style="display:inline-flex; align-items:center; gap:4px; font-size:11px; padding:3px 7px; background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); border-radius:4px; font-weight:700;">🔒 LOCKED (1 Device)</span>`;
+                            } else {
+                                hwidBadge = `<span style="display:inline-flex; align-items:center; gap:4px; font-size:11px; padding:3px 7px; background:rgba(52,211,153,0.15); color:#34d399; border:1px solid rgba(52,211,153,0.3); border-radius:4px; font-weight:600;">🔓 UNBOUND (1st Login Locks)</span>`;
+                            }
+                        } else {
+                            hwidBadge = `<span style="font-size:11px; color:rgba(255,255,255,0.4);">Exempt</span>`;
+                        }
+
+                        let validityBadge = `<span style="color:#a855f7; font-weight:700;">👑 Lifetime</span>`;
+                        if (isResellerUser) {
+                            const expAt = parseInt(u.expires_at, 10) || 0;
+                            const nowTs = Math.floor(Date.now() / 1000);
+                            if (expAt === 0) {
+                                validityBadge = `<span style="display:inline-flex; align-items:center; gap:4px; font-size:11px; padding:3px 7px; background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3); border-radius:4px; font-weight:700;">♾️ Lifetime</span>`;
+                            } else if (expAt > nowTs) {
+                                const daysLeft = Math.ceil((expAt - nowTs) / 86400);
+                                const dateStr = new Date(expAt * 1000).toISOString().slice(0, 10);
+                                const colorStyle = daysLeft <= 3 ? 'color:#fbbf24; background:rgba(251,191,36,0.15); border:1px solid rgba(251,191,36,0.3);' : 'color:#38bdf8; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.3);';
+                                validityBadge = `<span title="Expires: ${dateStr}" style="display:inline-flex; align-items:center; gap:4px; font-size:11px; padding:3px 7px; border-radius:4px; font-weight:700; ${colorStyle}">⏱️ ${daysLeft}d left</span>`;
+                            } else {
+                                const expDate = new Date(expAt * 1000).toISOString().slice(0, 10);
+                                validityBadge = `<span title="Expired on: ${expDate}" style="display:inline-flex; align-items:center; gap:4px; font-size:11px; padding:3px 7px; background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); border-radius:4px; font-weight:700;">⚠️ EXPIRED</span>`;
+                            }
+                        }
+
+                        const creditVal = (u.credits === -1 || isOwner) ? '∞ Unlimited' : (u.credits + ' Credits');
+                        const creditClass = (u.credits === -1 || isOwner || u.credits > 20) ? 'color: #34d399;' : (u.credits > 0 ? 'color: #fbbf24;' : 'color: #f87171;');
+
+                        const createdDate = u.created_at ? new Date(u.created_at * 1000).toISOString().slice(0, 10) : '—';
+
+                        return `
+                            <tr>
+                                <td style="font-weight: 700; color: #fff;">${esc(u.username)}</td>
+                                <td>${roleBadge}${isPaused ? ` <span title="KeyAuth Paused: All client keys frozen" style="display:inline-flex; align-items:center; gap:3px; font-size:10px; padding:2px 6px; background:rgba(239,68,68,0.25); color:#f87171; border:1px solid rgba(239,68,68,0.5); border-radius:4px; font-weight:800;">⏸️ PAUSED</span>` : ''}</td>
+                                <td>${validityBadge}</td>
+                                <td>${hwidBadge}</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; ${creditClass}">
+                                    ⚡ ${creditVal}
+                                </td>
+                                <td style="color: var(--text-muted); font-size: 12px;">${esc(u.created_by || 'system')}</td>
+                                <td style="font-family: var(--font-mono); font-weight: 700; color: #38bdf8;">${u.key_count ?? 0} keys</td>
+                                <td style="color: var(--text-muted); font-size: 12px;">${createdDate}</td>
+                                <td style="text-align: right;">
+                                    <div style="display: inline-flex; gap: 6px;">
+                                        ${canTogglePause ? (
+                                            isPaused
+                                                ? `<button class="btn btn-secondary btn-sm" onclick="toggleResellerPause('${esc(u.username)}', false)" title="Resume this reseller & reactivate all client keys" style="border-color: #10b981; color: #34d399; font-weight:700;">▶️ Resume</button>`
+                                                : `<button class="btn btn-secondary btn-sm" onclick="toggleResellerPause('${esc(u.username)}', true)" title="Pause this reseller & pause all client keys created by them" style="border-color: #f59e0b; color: #fbbf24; font-weight:700;">⏸️ Pause</button>`
+                                        ) : ''}
+                                        ${canManageValidity ? `
+                                            <button class="btn btn-secondary btn-sm" onclick="openValidityModal('${esc(u.username)}', ${u.expires_at || 0})" title="Set or extend KeyAuth validity for this reseller" style="border-color: #38bdf8; color: #38bdf8; font-weight:700;">📅 Validity</button>
+                                        ` : ''}
+                                        ${(canResetHwid && u.hwid) ? `
+                                            <button class="btn btn-secondary btn-sm" onclick="resetUserHwid('${esc(u.username)}')" title="Reset hardware lock so reseller can login on another device" style="border-color: rgba(239,68,68,0.4); color: #fca5a5;">🔓 Reset HWID</button>
+                                        ` : ''}
+                                        ${canManageCredits ? `
+                                            <button class="btn btn-amber btn-sm" onclick="openCreditModal('${esc(u.username)}', ${u.credits})">⚡ Credits</button>
+                                        ` : ''}
+                                        ${canDelete ? `
+                                            <button class="btn btn-danger btn-sm" onclick="deleteUser('${esc(u.username)}')">Delete</button>
+                                        ` : ''}
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('');
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="8" style="color: #ef4444; text-align: center; padding: 20px;">${esc(data.message)}</td></tr>`;
+                }
+            } catch (err) {
+                tbody.innerHTML = `<tr><td colspan="8" style="color: #ef4444; text-align: center; padding: 20px;">Failed to load accounts.</td></tr>`;
+            }
+        }
+
+        async function toggleResellerPause(username, pauseState) {
+            const actionWord = pauseState ? 'PAUSE' : 'RESUME';
+            const warning = pauseState
+                ? `Are you sure you want to PAUSE reseller '${username}'?\n\n• The reseller will be blocked from logging into this panel.\n• ALL CLIENT KEYS created by '${username}' will immediately be PAUSED in Happ and on the web portal.\n\nYou can resume them anytime with one click.`
+                : `Are you sure you want to RESUME reseller '${username}'?\n\n• The reseller will regain access to this panel.\n• ALL CLIENT KEYS created by '${username}' will immediately become ACTIVE again.`;
+
+            if (!confirm(warning)) return;
+
+            try {
+                const res = await fetch('api.php?action=toggle_user_pause', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: username, is_paused: pauseState })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    showToast(data.message || `Reseller ${actionWord.toLowerCase()}d successfully`);
+                    loadUsersList();
+                    if (typeof loadKeys === 'function') loadKeys();
+                } else {
+                    alert('Error: ' + (data.message || 'Operation failed'));
+                }
+            } catch (err) {
+                alert('Connection error: ' + err.message);
+            }
+        }
+
+        async function resetUserHwid(username) {
+            if (!confirm(`Are you sure you want to reset the hardware lock (HWID) for reseller '${username}'?\n\nThey will be able to bind to a new device on their next login.`)) {
+                return;
+            }
+            try {
+                const res = await fetch('api.php?action=reset_user_hwid', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    showToast(data.message || 'HWID reset successfully');
+                    loadUsersList();
+                } else {
+                    alert(data.message || 'Failed to reset HWID');
+                }
+            } catch (err) {
+                alert('Connection error');
+            }
+        }
+
+        let validityTargetUser = '';
+        function openValidityModal(username, currentExp) {
+            validityTargetUser = username;
+            document.getElementById('validity-target-name').textContent = username;
+            const statusEl = document.getElementById('validity-current-status');
+            const exp = parseInt(currentExp, 10) || 0;
+            const now = Math.floor(Date.now() / 1000);
+            if (exp === 0) {
+                statusEl.textContent = '♾️ Lifetime (No Expiry)';
+                statusEl.style.color = '#c084fc';
+            } else if (exp > now) {
+                const days = Math.ceil((exp - now) / 86400);
+                const dt = new Date(exp * 1000).toISOString().slice(0, 10);
+                statusEl.textContent = `Valid (${days} days left - ${dt})`;
+                statusEl.style.color = '#38bdf8';
+            } else {
+                const dt = new Date(exp * 1000).toISOString().slice(0, 10);
+                statusEl.textContent = `⚠️ EXPIRED on ${dt}`;
+                statusEl.style.color = '#f87171';
+            }
+            openModal('validity-modal');
+        }
+
+        async function submitValidityAction(mode, days) {
+            if (!validityTargetUser) return;
+            try {
+                const res = await fetch('api.php?action=update_user_validity', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: validityTargetUser,
+                        mode: mode,
+                        days: days
+                    })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    showToast(data.message || 'Validity updated successfully');
+                    closeModal('validity-modal');
+                    loadUsersList();
+                } else {
+                    alert(data.message || 'Failed to update validity');
+                }
+            } catch (e) {
+                alert('Connection error');
+            }
+        }
+
+        function handleCustomValidity(e) {
+            e.preventDefault();
+            const days = parseInt(document.getElementById('validity-custom-days').value, 10) || 30;
+            submitValidityAction('set_days', days);
+        }
+
+        function strcasecmp(a, b) {
+            return String(a || '').toLowerCase() === String(b || '').toLowerCase();
+        }
+
+        document.getElementById('create-user-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('create-user-btn');
+            btn.disabled = true;
+            btn.textContent = 'CREATING…';
+
+            const username = document.getElementById('new-user-name').value.trim();
+            const password = document.getElementById('new-user-pass').value;
+            const role = document.getElementById('new-user-role').value;
+            const initialCredits = parseInt(document.getElementById('new-user-credits').value, 10) || 0;
+            const validityDays = parseInt(document.getElementById('new-user-validity').value, 10) || 30;
+
+            try {
+                const res = await fetch('api.php?action=create_user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, role, initial_credits: initialCredits, validity_days: validityDays })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    showToast(data.message);
+                    document.getElementById('create-user-form').reset();
+                    document.getElementById('new-user-credits').value = '100';
+                    loadUsersList();
+                    loadKeys();
+                } else {
+                    showToast('❌ ' + (data.message || 'Could not create account'));
+                    alert(data.message || 'Could not create account');
+                }
+            } catch (err) {
+                alert('Connection error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Create';
+            }
+        });
+
+        async function deleteUser(username) {
+            if (!confirm(`Are you sure you want to delete user account '${username}'?`)) return;
+
+            try {
+                const res = await fetch('api.php?action=delete_user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    showToast(data.message);
+                    loadUsersList();
+                    loadKeys();
+                } else {
+                    alert(data.message || 'Could not delete user');
+                }
+            } catch (err) {
+                alert('Connection error');
+            }
+        }
+
+        // Quick Credit Top-up Sub-Modal
+        function openCreditModal(username, currentCredits) {
+            document.getElementById('credit-target-hidden').value = username;
+            document.getElementById('credit-target-user').textContent = username;
+            document.getElementById('credit-target-curr').textContent = (currentCredits === -1) ? '∞ Unlimited' : currentCredits;
+            document.getElementById('credit-amount').value = '50';
+            document.getElementById('credit-mode').value = 'add';
+            openModal('credit-modal');
+        }
+
+        function setCreditPreset(amt) {
+            document.getElementById('credit-amount').value = amt;
+            document.getElementById('credit-mode').value = 'add';
+        }
+
+        document.getElementById('credit-adjust-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('credit-submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'UPDATING…';
+
+            const username = document.getElementById('credit-target-hidden').value;
+            const amount = parseInt(document.getElementById('credit-amount').value, 10) || 0;
+            const mode = document.getElementById('credit-mode').value;
+
+            try {
+                const res = await fetch('api.php?action=update_credits', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, amount, mode })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    closeModal('credit-modal');
+                    showToast(data.message);
+                    if (data.my_credits !== undefined) {
+                        state.credits = data.my_credits;
+                        updateCreditsUI();
+                    }
+                    loadUsersList();
+                } else {
+                    alert(data.message || 'Could not update credits');
+                }
+            } catch (err) {
+                alert('Connection error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Update Credits';
+            }
+        });
+
+        // Initialize
+        // ==========================================
+        // AUTONOMOUS PROXY SENTINEL BOT CONTROLS
+        // (Owner & Admin Exclusive - Resellers Forbidden)
+        // ==========================================
+        async function fetchBotStatus() {
+            if (!state.authenticated || (state.role !== 'owner' && state.role !== 'admin')) {
+                const panel = document.getElementById('sentinel-bot-panel');
+                if (panel) panel.style.display = 'none';
+                return;
+            }
+            try {
+                const res = await fetch('api.php?action=bot_status');
+                if (res.status === 403) {
+                    const panel = document.getElementById('sentinel-bot-panel');
+                    if (panel) panel.style.display = 'none';
+                    return;
+                }
+                const data = await res.json();
+                if (data.status === 'success') {
+                    renderBotUI(data);
+                }
+            } catch (e) {
+                console.error('Bot status fetch error:', e);
+            }
+        }
+
+        function renderBotUI(data) {
+            const isRunning = data.bot_active && (data.state && data.state.status === 'RUNNING');
+            const badge = document.getElementById('bot-badge');
+            const btnStart = document.getElementById('btn-bot-start');
+            const btnStop = document.getElementById('btn-bot-stop');
+            const serverEl = document.getElementById('bot-active-server');
+            const pingEl = document.getElementById('bot-live-ping');
+            const scanEl = document.getElementById('bot-last-scan');
+            const msgEl = document.getElementById('bot-diag-msg');
+
+            if (!badge) return;
+
+            if (isRunning) {
+                badge.textContent = '● ACTIVE & MONITORING';
+                badge.style.background = 'rgba(16, 185, 129, 0.2)';
+                badge.style.color = '#10b981';
+                badge.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                btnStart.style.display = 'none';
+                btnStop.style.display = 'inline-block';
+            } else {
+                badge.textContent = '⏸ BOT PAUSED';
+                badge.style.background = 'rgba(239, 68, 68, 0.2)';
+                badge.style.color = '#ef4444';
+                badge.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+                btnStart.style.display = 'inline-block';
+                btnStop.style.display = 'none';
+            }
+
+            if (data.state) {
+                if (serverEl && data.state.active_server) serverEl.textContent = data.state.active_server;
+                if (pingEl && data.state.ping_ms !== undefined) {
+                    const p = data.state.ping_ms;
+                    pingEl.textContent = (p < 999) ? `${p} ms` : 'N/A';
+                    pingEl.style.color = (p < 150) ? '#10b981' : ((p < 300) ? '#f59e0b' : '#ef4444');
+                }
+                if (scanEl && data.state.last_check) scanEl.textContent = data.state.last_check;
+                if (msgEl && data.state.message) msgEl.textContent = data.state.message;
+            }
+        }
+
+        async function startSentinelBot() {
+            if (state.role !== 'owner' && state.role !== 'admin') {
+                showToast('Access Denied: Only Owner and Admin can control Sentinel Bot.');
+                return;
+            }
+            const btn = document.getElementById('btn-bot-start');
+            if (btn) btn.disabled = true;
+            try {
+                const res = await fetch('api.php?action=bot_start', { method: 'POST' });
+                const d = await res.json();
+                if (d.status === 'success') {
+                    showToast(d.message || 'Bot started');
+                } else {
+                    showToast(d.message || 'Failed to start bot');
+                }
+                fetchBotStatus();
+            } catch (e) {
+                alert('Connection error');
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        }
+
+        async function stopSentinelBot() {
+            if (state.role !== 'owner' && state.role !== 'admin') {
+                showToast('Access Denied: Only Owner and Admin can control Sentinel Bot.');
+                return;
+            }
+            if (!confirm('Are you sure you want to pause the autonomous proxy monitoring bot?')) return;
+            const btn = document.getElementById('btn-bot-stop');
+            if (btn) btn.disabled = true;
+            try {
+                const res = await fetch('api.php?action=bot_stop', { method: 'POST' });
+                const d = await res.json();
+                if (d.status === 'success') {
+                    showToast(d.message || 'Bot paused');
+                } else {
+                    showToast(d.message || 'Failed to pause bot');
+                }
+                fetchBotStatus();
+            } catch (e) {
+                alert('Connection error');
+            } finally {
+                if (btn) btn.disabled = false;
+            }
+        }
+
+        async function triggerSentinelFix() {
+            if (state.role !== 'owner' && state.role !== 'admin') {
+                showToast('Access Denied: Only Owner and Admin can run health checks.');
+                return;
+            }
+            const btn = document.getElementById('btn-bot-fix');
+            const originalText = btn ? btn.textContent : '';
+            if (btn) {
+                btn.disabled = true;
+                btn.textContent = '⏳ Testing & Healing...';
+            }
+            try {
+                const res = await fetch('api.php?action=bot_trigger', { method: 'POST' });
+                const d = await res.json();
+                if (d.result && d.result.message) {
+                    alert('Diagnostic Result:\n' + d.result.message);
+                } else {
+                    alert(d.message || 'Health check executed');
+                }
+                fetchBotStatus();
+            } catch (e) {
+                alert('Execution error: ' + e.message);
+            } finally {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                }
+            }
+        }
+
+        // Initialize & poll bot status
+        checkStatus();
+        setInterval(fetchBotStatus, 10000);
+
+        // ==========================================
+        // SENTINEL AI CHAT CONTROLLER
+        // (Owner & Admin Exclusive - Resellers Forbidden)
+        // ==========================================
+        function sendQuickPrompt(promptText) {
+            if (state.role !== 'owner' && state.role !== 'admin') {
+                showToast('Access Denied: Only Owner and Admin can interact with Sentinel AI.');
+                return;
+            }
+            const input = document.getElementById('bot-chat-input');
+            if (input) {
+                input.value = promptText;
+                sendChatMessage();
+            }
+        }
+
+        function clearChatMessages() {
+            const chatBox = document.getElementById('bot-chat-box');
+            if (chatBox) {
+                const displayName = (state.username) ? esc(state.username) : 'Admin';
+                chatBox.innerHTML = `
+                    <div style="align-self: flex-start; max-width: 85%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 16px; color: #f4f4f7; line-height: 1.5;">
+                        👋 <b>Hello ${displayName}!</b> I am your <b>Autonomous Sentinel AI</b> with full access to this server.<br>
+                        You can type instructions below like: <i>"speed up server"</i>, <i>"fix N/A"</i>, <i>"switch to bom2"</i>, or <i>"status"</i>. I will execute them immediately on the VPS.
+                    </div>
+                `;
+            }
+        }
+
+        async function sendChatMessage() {
+            if (state.role !== 'owner' && state.role !== 'admin') {
+                showToast('Access Denied: Only Owner and Admin can interact with Sentinel AI.');
+                return;
+            }
+            const input = document.getElementById('bot-chat-input');
+            const btn = document.getElementById('btn-chat-send');
+            const chatBox = document.getElementById('bot-chat-box');
+            if (!input || !input.value.trim()) return;
+
+            const userText = input.value.trim();
+            input.value = '';
+            btn.disabled = true;
+
+            // Render user bubble
+            const uBubble = document.createElement('div');
+            uBubble.style.cssText = 'align-self: flex-end; background: #9333ea; color: #fff; padding: 10px 14px; border-radius: 12px 12px 2px 12px; max-width: 80%; font-size: 13px; line-height: 1.4; word-break: break-word;';
+            uBubble.textContent = userText;
+            chatBox.appendChild(uBubble);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Render loading bubble
+            const loadingBubble = document.createElement('div');
+            loadingBubble.style.cssText = 'align-self: flex-start; background: rgba(255, 255, 255, 0.08); color: #83839c; padding: 10px 14px; border-radius: 12px 12px 12px 2px; max-width: 80%; font-size: 13px;';
+            loadingBubble.textContent = 'Sentinel AI is thinking & optimizing...';
+            chatBox.appendChild(loadingBubble);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                const res = await fetch('api.php?action=bot_chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userText })
+                });
+                if (res.status === 403) {
+                    loadingBubble.style.color = '#ef4444';
+                    loadingBubble.textContent = 'Access Denied: Only Owner and Admin can chat with Sentinel AI.';
+                    return;
+                }
+                const d = await res.json();
+                if (d.status === 'success' && d.reply) {
+                    loadingBubble.style.color = '#f4f4f7';
+                    loadingBubble.innerHTML = d.reply.replace(/\n/g, '<br>');
+                } else {
+                    loadingBubble.textContent = d.message || 'Unable to process query';
+                }
+                fetchBotStatus();
+            } catch (e) {
+                loadingBubble.textContent = 'Connection error with AI Engine';
+            } finally {
+                btn.disabled = false;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
+
+    <!-- Game Patch Maintenance Modal -->
+    <div id="modal-maintenance" class="modal-overlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 99999; align-items: center; justify-content: center;">
+        <div class="modal" style="width: 100%; max-width: 520px; background: #12131a; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px; padding: 26px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+            <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">🛠️</span>
+                    <h3 style="margin: 0; font-size: 18px; font-weight: 800; color: #fff; letter-spacing: 0.5px;">Game Patch Maintenance</h3>
+                </div>
+                <button onclick="closeModal('modal-maintenance')" style="background: none; border: none; font-size: 26px; color: #94a3b8; cursor: pointer; line-height: 1;">&times;</button>
+            </div>
+            <div class="modal-body" style="display: flex; flex-direction: column; gap: 18px;">
+                <div id="maint-status-banner" style="padding: 12px 18px; border-radius: 8px; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399;">
+                    <span id="maint-modal-status-text">Status: LIVE (Users Active)</span>
+                    <span id="maint-modal-badge" style="padding: 4px 10px; border-radius: 12px; background: rgba(16, 185, 129, 0.25); color: #34d399; font-size: 11px; font-weight: 800; letter-spacing: 0.5px;">LIVE</span>
+                </div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.55; margin: 0;">
+                    When Game Patch Maintenance is <strong style="color: #fff;">ENABLED</strong>, clients visiting the website or generating keys are blocked with the maintenance patch notice. Subscriptions in Happ/APK will show a maintenance notice node to prevent bans while patches are being applied.
+                </p>
+                <div>
+                    <label style="display: block; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;">Notice Message to Users</label>
+                    <textarea id="maint-custom-message" rows="3" style="width: 100%; box-sizing: border-box; resize: vertical; font-size: 13px; background: rgba(0,0,0,0.45); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; color: #fff; padding: 12px; font-family: inherit; line-height: 1.4;" placeholder="Server is undergoing scheduled game patch maintenance. Configs are updating. Please wait..."></textarea>
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 6px;">
+                    <button class="btn btn-secondary btn-sm" onclick="closeModal('modal-maintenance')" style="padding: 9px 18px; border-radius: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #e2e8f0; cursor: pointer; font-weight: 600;">Close</button>
+                    <button id="btn-maint-action" class="btn btn-sm" onclick="executeMaintenanceToggle()" style="font-weight: 800; padding: 9px 22px; border-radius: 8px; background: #e11d48; color: #fff; border: none; cursor: pointer; transition: all 0.2s ease;">
+                        Turn ON Maintenance
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    let currentMaintStatus = false;
+
+    async function checkMaintenanceStatus() {
+        try {
+            const res = await fetch('api.php?action=get_maintenance');
+            const data = await res.json();
+            if (data && data.success) {
+                currentMaintStatus = !!data.maintenance.enabled;
+                updateMaintenanceUI(data.maintenance);
+            }
+        } catch(e) {
+            console.error("Failed to check maintenance:", e);
+        }
+    }
+
+    function updateMaintenanceUI(maint) {
+        const dot = document.getElementById('maint-indicator-dot');
+        const text = document.getElementById('maint-btn-text');
+        const banner = document.getElementById('maint-status-banner');
+        const statusText = document.getElementById('maint-modal-status-text');
+        const badge = document.getElementById('maint-modal-badge');
+        const actionBtn = document.getElementById('btn-maint-action');
+        const msgInput = document.getElementById('maint-custom-message');
+
+        if (maint.enabled) {
+            if (dot) {
+                dot.style.background = '#f43f5e';
+                dot.style.boxShadow = '0 0 10px #f43f5e';
+            }
+            if (text) {
+                text.textContent = 'MAINTENANCE: ON';
+                text.style.color = '#f43f5e';
+            }
+            if (banner) {
+                banner.style.background = 'rgba(244, 63, 94, 0.15)';
+                banner.style.borderColor = 'rgba(244, 63, 94, 0.4)';
+                banner.style.color = '#fb7185';
+            }
+            if (statusText) statusText.textContent = 'Status: MAINTENANCE ACTIVE (Clients Locked)';
+            if (badge) {
+                badge.textContent = 'ACTIVE';
+                badge.style.background = 'rgba(244, 63, 94, 0.25)';
+                badge.style.color = '#fb7185';
+            }
+            if (actionBtn) {
+                actionBtn.textContent = 'Turn OFF Maintenance';
+                actionBtn.style.background = '#10b981';
+            }
+        } else {
+            if (dot) {
+                dot.style.background = '#10b981';
+                dot.style.boxShadow = '0 0 8px #10b981';
+            }
+            if (text) {
+                text.textContent = 'MAINTENANCE: OFF';
+                text.style.color = '#94a3b8';
+            }
+            if (banner) {
+                banner.style.background = 'rgba(16, 185, 129, 0.12)';
+                banner.style.borderColor = 'rgba(16, 185, 129, 0.35)';
+                banner.style.color = '#34d399';
+            }
+            if (statusText) statusText.textContent = 'Status: LIVE (Users Active)';
+            if (badge) {
+                badge.textContent = 'LIVE';
+                badge.style.background = 'rgba(16, 185, 129, 0.25)';
+                badge.style.color = '#34d399';
+            }
+            if (actionBtn) {
+                actionBtn.textContent = 'Turn ON Maintenance';
+                actionBtn.style.background = '#e11d48';
+            }
+        }
+        if (msgInput && maint.message && !msgInput.matches(':focus')) {
+            msgInput.value = maint.message;
+        }
+    }
+
+    function openMaintenanceModal() {
+        checkMaintenanceStatus();
+        const modal = document.getElementById('modal-maintenance');
+        if (modal) modal.style.display = 'flex';
+    }
+
+    async function executeMaintenanceToggle() {
+        const newStatus = !currentMaintStatus;
+        const msgInput = document.getElementById('maint-custom-message');
+        const message = msgInput ? msgInput.value.trim() : '';
+
+        const actionBtn = document.getElementById('btn-maint-action');
+        if (actionBtn) actionBtn.disabled = true;
+
+        try {
+            const res = await fetch('api.php?action=toggle_maintenance', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    enabled: newStatus,
+                    message: message
+                })
+            });
+            const data = await res.json();
+            if (data && data.success) {
+                currentMaintStatus = newStatus;
+                updateMaintenanceUI(data.maintenance);
+                alert(newStatus ? 'Maintenance mode is now ENABLED! Clients will see the maintenance screen.' : 'Maintenance mode is now DISABLED. Portal is LIVE!');
+            } else {
+                alert('Failed to update maintenance: ' + (data.error || 'Unknown error'));
+            }
+        } catch(e) {
+            alert('Error: ' + e.message);
+        } finally {
+            if (actionBtn) actionBtn.disabled = false;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        checkMaintenanceStatus();
+        setInterval(checkMaintenanceStatus, 30000);
+    });
+    </script>
+
+</body>
+</html>

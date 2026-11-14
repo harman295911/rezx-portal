@@ -1,0 +1,20 @@
+# ==============================================================================
+# Netlify Redirects Configuration for RezX Modz
+# ==============================================================================
+
+# 1. Backend Proxy to Live Cloudflare HTTPS Tunnel
+/api/*              https://international-textbooks-highest-metro.trycloudflare.com/api/:splat              200!
+/sub.php            https://international-textbooks-highest-metro.trycloudflare.com/sub.php                 200!
+/sub_legit.php      https://international-textbooks-highest-metro.trycloudflare.com/sub_legit.php           200!
+/sub_rage.php       https://international-textbooks-highest-metro.trycloudflare.com/sub_rage.php            200!
+/sub_v1.php         https://international-textbooks-highest-metro.trycloudflare.com/sub_v1.php              200!
+/sub_v2.php         https://international-textbooks-highest-metro.trycloudflare.com/sub_v2.php              200!
+/sub_v3.php         https://international-textbooks-highest-metro.trycloudflare.com/sub_v3.php              200!
+
+# 2. Admin SPA Routing
+/admin              /admin/index.html          200
+/admin/             /admin/index.html          200
+/admin/*            /admin/index.html          200
+
+# 3. Direct Downloads
+/download/RezX_Modz.apk    https://github.com/hiddify/hiddify-app/releases/latest    302

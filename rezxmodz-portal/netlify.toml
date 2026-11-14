@@ -1,0 +1,68 @@
+# netlify.toml - RezX Modz Static & Security Configuration
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://international-textbooks-highest-metro.trycloudflare.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sub.php"
+  to = "https://international-textbooks-highest-metro.trycloudflare.com/sub.php"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sub_legit.php"
+  to = "https://international-textbooks-highest-metro.trycloudflare.com/sub_legit.php"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sub_rage.php"
+  to = "https://international-textbooks-highest-metro.trycloudflare.com/sub_rage.php"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sub_v1.php"
+  to = "https://international-textbooks-highest-metro.trycloudflare.com/sub_v1.php"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sub_v2.php"
+  to = "https://international-textbooks-highest-metro.trycloudflare.com/sub_v2.php"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sub_v3.php"
+  to = "https://international-textbooks-highest-metro.trycloudflare.com/sub_v3.php"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/download/RezX_Modz.apk"
+  to = "https://github.com/hiddify/hiddify-app/releases/latest"
+  status = 302
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization, X-Requested-With"
+    X-Content-Type-Options = "nosniff"

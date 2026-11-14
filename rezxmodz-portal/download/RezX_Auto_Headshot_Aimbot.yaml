@@ -1,0 +1,95 @@
+port: 7890
+socks-port: 7891
+allow-lan: false
+mode: rule
+log-level: info
+unified-delay: true
+tcp-concurrent: true
+
+proxies:
+  - name: "01. 🇮🇳 INDIA RezX [MUMBAI VIP • 20ms • ALL GUNS AIMLOCK & HEADSHOT]"
+    type: hysteria2
+    server: proxy-ind.dripwire.cc
+    port: 443
+    password: "7569711485:6ad446c3a634245e"
+    sni: proxy-ind.dripwire.cc
+    skip-cert-verify: true
+    alpn:
+      - h3
+  - name: "02. 🇸🇬 SINGAPORE RezX [SG VIP • 35ms • ALL GUNS AIMLOCK & HEADSHOT]"
+    type: hysteria2
+    server: proxy-sg.dripwire.cc
+    port: 443
+    password: "7569711485:6ad446c3a634245e"
+    sni: proxy-sg.dripwire.cc
+    skip-cert-verify: true
+    alpn:
+      - h3
+  - name: "03. 🇧🇩 BANGLADESH RezX [DHAKA VIP • 30ms • ALL GUNS AIMLOCK & HEADSHOT]"
+    type: hysteria2
+    server: proxy-bd.dripwire.cc
+    port: 443
+    password: "7569711485:6ad446c3a634245e"
+    sni: proxy-bd.dripwire.cc
+    skip-cert-verify: true
+    alpn:
+      - h3
+  - name: "04. 🇪🇺 EUROPE RezX [FRANKFURT VIP • 90ms • ALL GUNS AIMLOCK & HEADSHOT]"
+    type: hysteria2
+    server: proxy-eu.dripwire.cc
+    port: 443
+    password: "7569711485:6ad446c3a634245e"
+    sni: proxy-eu.dripwire.cc
+    skip-cert-verify: true
+    alpn:
+      - h3
+  - name: "05. 🇧🇷 BRAZIL RezX [SAO PAULO VIP • 120ms • ALL GUNS AIMLOCK & HEADSHOT]"
+    type: hysteria2
+    server: proxy-br.dripwire.cc
+    port: 443
+    password: "7569711485:6ad446c3a634245e"
+    sni: proxy-br.dripwire.cc
+    skip-cert-verify: true
+    alpn:
+      - h3
+  - name: "06. 🛡️ RezX BACKUP [ANTI-999+ FAILOVER • 20ms • HIGH TICKRATE]"
+    type: hysteria2
+    server: rezxmodz.lol
+    port: 443
+    password: "4114330289"
+    sni: rezxmodz.lol
+    skip-cert-verify: true
+    alpn:
+      - h3
+
+proxy-groups:
+  - name: "🎯 RezX Combat Selector"
+    type: select
+    proxies:
+      - "01. 🇮🇳 INDIA RezX [MUMBAI VIP • 20ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "02. 🇸🇬 SINGAPORE RezX [SG VIP • 35ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "03. 🇧🇩 BANGLADESH RezX [DHAKA VIP • 30ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "04. 🇪🇺 EUROPE RezX [FRANKFURT VIP • 90ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "05. 🇧🇷 BRAZIL RezX [SAO PAULO VIP • 120ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "06. 🛡️ RezX BACKUP [ANTI-999+ FAILOVER • 20ms • HIGH TICKRATE]"
+      - "⚡ RezX Lowest Ping Auto"
+      - DIRECT
+
+  - name: "⚡ RezX Lowest Ping Auto"
+    type: url-test
+    url: http://cp.cloudflare.com/generate_204
+    interval: 300
+    proxies:
+      - "01. 🇮🇳 INDIA RezX [MUMBAI VIP • 20ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "02. 🇸🇬 SINGAPORE RezX [SG VIP • 35ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "03. 🇧🇩 BANGLADESH RezX [DHAKA VIP • 30ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "04. 🇪🇺 EUROPE RezX [FRANKFURT VIP • 90ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "05. 🇧🇷 BRAZIL RezX [SAO PAULO VIP • 120ms • ALL GUNS AIMLOCK & HEADSHOT]"
+      - "06. 🛡️ RezX BACKUP [ANTI-999+ FAILOVER • 20ms • HIGH TICKRATE]"
+
+rules:
+  - DOMAIN-SUFFIX,ggpolarbear.com,🎯 RezX Combat Selector
+  - DOMAIN-SUFFIX,ggblueshark.com,🎯 RezX Combat Selector
+  - PORT,7000-15000,🎯 RezX Combat Selector
+  - PORT,39000-39999,🎯 RezX Combat Selector
+  - MATCH,🎯 RezX Combat Selector
